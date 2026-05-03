@@ -2,214 +2,316 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1a0e05">
 <title>Mi Coleccion de Vinilos</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --ink:#1a1a1a;--ink2:#555;--ink3:#999;
-  --paper:#faf8f4;--paper2:#f2efe8;--paper3:#e8e4d8;
-  --groove:#1a0e05;--groove2:#3d2008;
-  --gold:#c9a84c;--gold2:#f0c96a;
-  --red:#b83232;--green:#2a7a45;
-  --r:14px;--rs:10px;
-  --sb:env(safe-area-inset-bottom,16px);
+  --ink:#1a1a1a;--ink2:#4a4a4a;--ink3:#888;
+  --paper:#f8f5ef;--paper2:#f0ece3;--paper3:#e4ddd0;
+  --groove:#140b03;--groove2:#2e1608;--groove3:#4a2510;
+  --gold:#c9a84c;--gold2:#e8c46a;--gold3:#fff0c0;
+  --red:#c0392b;--green:#27ae60;--blue:#2980b9;
+  --r:16px;--rs:11px;
+  --sb:env(safe-area-inset-bottom,0px);
   --st:env(safe-area-inset-top,0px);
+  --hdr-h:72px;
+  --nav-h:calc(60px + var(--sb));
 }
-html,body{height:100%;overflow:hidden;background:var(--groove)}
-body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;flex-direction:column;max-width:430px;margin:0 auto}
+html{height:100%;background:#0d0602}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);margin:0;height:100%;overflow:hidden}
+
+/* ── SHELL: full viewport, no max-width constraint ── */
 .shell{display:flex;flex-direction:column;height:100vh;height:100dvh;background:var(--paper);overflow:hidden}
 
-/* HEADER */
-.hdr{background:var(--groove);color:#f5ead0;padding-top:calc(12px + var(--st));padding-bottom:12px;padding-left:16px;padding-right:16px;flex-shrink:0;position:relative;overflow:hidden}
-.hdr::before{content:'';position:absolute;right:-50px;top:-50px;width:180px;height:180px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.1)}
-.hdr-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.vdisk{width:34px;height:34px;border-radius:50%;background:conic-gradient(#0d0d0d 0deg 30deg,#222 30deg 60deg,#0d0d0d 60deg 90deg,#222 90deg 120deg,#0d0d0d 120deg 150deg,#222 150deg 180deg,#0d0d0d 180deg 210deg,#222 210deg 240deg,#0d0d0d 240deg 270deg,#222 270deg 300deg,#0d0d0d 300deg 330deg,#222 330deg 360deg);box-shadow:0 0 0 3px rgba(201,168,76,0.3);position:relative;flex-shrink:0}
-.vdisk::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px #080402}
-.logo-text{font-family:'Playfair Display',serif;font-size:17px}
-.logo-sub{font-size:9px;color:rgba(245,234,208,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:1px}
-.hdr-right{display:flex;align-items:center;gap:5px}
-.cpill{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--gold2);white-space:nowrap}
-.hbtn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:5px 8px;font-size:11px;color:rgba(245,234,208,0.7);cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;display:inline-block;text-align:center}
+/* ── HEADER ── */
+.hdr{
+  background:linear-gradient(135deg,var(--groove) 0%,var(--groove2) 100%);
+  color:#f5ead0;
+  padding:calc(10px + var(--st)) 24px 10px;
+  flex-shrink:0;
+  position:relative;overflow:hidden;
+  min-height:var(--hdr-h);
+  display:flex;align-items:center;
+}
+.hdr::before,.hdr::after{content:'';position:absolute;border-radius:50%;border:1px solid rgba(201,168,76,0.12)}
+.hdr::before{right:-60px;top:-60px;width:220px;height:220px}
+.hdr::after{right:40px;bottom:-80px;width:160px;height:160px}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px;position:relative;z-index:1}
+.logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.vdisk{width:40px;height:40px;border-radius:50%;flex-shrink:0;position:relative;
+  background:conic-gradient(#0a0a0a 0deg 30deg,#1e1e1e 30deg 60deg,#0a0a0a 60deg 90deg,#1e1e1e 90deg 120deg,#0a0a0a 120deg 150deg,#1e1e1e 150deg 180deg,#0a0a0a 180deg 210deg,#1e1e1e 210deg 240deg,#0a0a0a 240deg 270deg,#1e1e1e 270deg 300deg,#0a0a0a 300deg 330deg,#1e1e1e 330deg 360deg);
+  box-shadow:0 0 0 3px rgba(201,168,76,0.4),0 4px 12px rgba(0,0,0,0.4)}
+.vdisk::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2.5px #050200}
+.logo-text{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:-0.01em;line-height:1.1}
+.logo-sub{font-size:10px;color:rgba(245,234,208,0.45);letter-spacing:0.12em;text-transform:uppercase;margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:6px}
+.cpill{background:rgba(201,168,76,0.18);border:1px solid rgba(201,168,76,0.35);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gold2);letter-spacing:0.03em;white-space:nowrap;font-weight:500}
+.hbtn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:9px;padding:6px 11px;font-size:11px;color:rgba(245,234,208,0.75);cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;font-weight:500;display:inline-block;text-align:center;transition:background 0.15s}
+.hbtn:hover{background:rgba(255,255,255,0.16)}
 
-/* NAV */
-.nav{display:flex;background:var(--groove);border-top:1px solid rgba(255,255,255,0.06);flex-shrink:0}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:10px;padding-bottom:calc(10px + var(--sb));background:none;border:none;cursor:pointer;color:rgba(245,234,208,0.3)}
+/* ── NAV TABS ── */
+.nav{display:flex;background:var(--groove);border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  padding-top:10px;padding-bottom:calc(10px + var(--sb));
+  background:none;border:none;cursor:pointer;color:rgba(245,234,208,0.28);transition:color 0.2s;position:relative}
 .nb.active{color:var(--gold2)}
-.nb svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.nb span{font-size:10px;letter-spacing:0.04em;font-weight:500}
+.nb.active::after{content:'';position:absolute;top:0;left:20%;right:20%;height:2px;background:var(--gold);border-radius:0 0 2px 2px}
+.nb svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nb span{font-size:10px;letter-spacing:0.04em;font-weight:600}
 
+/* ── SCROLL AREA ── */
 .scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.view{display:none;min-height:100%}
+.view{display:none;min-height:100%;padding-bottom:16px}
 .view.active{display:block}
 
-/* FORM */
-.add-wrap{padding:16px}
-.slbl{font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:7px}
-.acw{position:relative;margin-bottom:12px}
-.aci{width:100%;padding:13px 40px 13px 44px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:16px;background:white;color:var(--ink);outline:none;-webkit-appearance:none;display:block}
-.aci:focus{border-color:var(--groove2)}
+/* ── ADD FORM ── */
+.add-wrap{padding:20px 24px 0}
+.section-label{font-size:10px;font-weight:700;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.acw{position:relative;margin-bottom:14px}
+.aci{width:100%;padding:14px 42px 14px 46px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:16px;background:white;color:var(--ink);outline:none;-webkit-appearance:none;transition:border-color 0.2s,box-shadow 0.2s}
+.aci:focus{border-color:var(--groove3);box-shadow:0 0 0 3px rgba(74,37,16,0.08)}
 .aci.filled{border-color:var(--gold)}
-.aci-il{position:absolute;left:13px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:0.28;width:20px;height:20px}
-.aci-clr{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:none;background:var(--paper2);cursor:pointer;font-size:16px;color:var(--ink3);visibility:hidden;line-height:28px;text-align:center}
+.aci-il{position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:0.25;width:20px;height:20px}
+.aci-clr{position:absolute;right:11px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:none;background:var(--paper2);cursor:pointer;font-size:15px;color:var(--ink3);visibility:hidden;line-height:28px;text-align:center}
 .aci-clr.show{visibility:visible}
 
-/* DROPDOWN */
-.dd{position:absolute;top:calc(100% + 5px);left:0;right:0;background:white;border:2px solid var(--paper3);border-radius:var(--rs);box-shadow:0 10px 30px rgba(0,0,0,0.15);z-index:200;max-height:240px;overflow-y:auto;display:none}
+/* ── DROPDOWN ── */
+.dd{position:absolute;top:calc(100% + 6px);left:0;right:0;background:white;border:2px solid var(--paper3);border-radius:var(--rs);box-shadow:0 12px 40px rgba(0,0,0,0.14);z-index:200;max-height:260px;overflow-y:auto;display:none}
 .dd.open{display:block}
-.dd-row{display:flex;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid var(--paper2);cursor:pointer}
+.dd-row{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--paper2);cursor:pointer;transition:background 0.12s}
 .dd-row:last-child{border-bottom:none}
-.dd-row:active{background:var(--paper2)}
-.dd-thumb{width:40px;height:40px;border-radius:6px;flex-shrink:0;object-fit:cover;background:var(--paper2)}
-.dd-thumb-ph{width:40px;height:40px;border-radius:6px;flex-shrink:0;background:var(--groove);display:flex;align-items:center;justify-content:center}
-.dd-thumb-ph svg{width:16px;height:16px;stroke:rgba(245,234,208,0.4);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.dd-row:active,.dd-row:hover{background:var(--paper2)}
+.dd-thumb{width:42px;height:42px;border-radius:7px;flex-shrink:0;object-fit:cover;background:var(--paper2)}
+.dd-thumb-ph{width:42px;height:42px;border-radius:7px;flex-shrink:0;background:var(--groove);display:flex;align-items:center;justify-content:center}
+.dd-thumb-ph svg{width:16px;height:16px;stroke:rgba(245,234,208,0.35);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .dd-info{flex:1;min-width:0}
-.dd-main{font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dd-sub{font-size:11px;color:var(--ink3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dd-badge{font-size:10px;background:var(--paper2);color:var(--ink3);padding:3px 8px;border-radius:10px;flex-shrink:0}
-.dd-msg{padding:14px;font-size:13px;color:var(--ink3);display:flex;align-items:center;gap:8px}
-.spin{width:14px;height:14px;border:2px solid var(--paper3);border-top-color:var(--groove2);border-radius:50%;animation:rot 0.7s linear infinite;flex-shrink:0}
+.dd-main{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dd-sub{font-size:11px;color:var(--ink3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dd-badge{font-size:10px;background:var(--paper2);color:var(--ink3);padding:3px 9px;border-radius:10px;flex-shrink:0;font-weight:500}
+.dd-msg{padding:14px 16px;font-size:13px;color:var(--ink3);display:flex;align-items:center;gap:9px}
+.spin{width:14px;height:14px;border:2px solid var(--paper3);border-top-color:var(--groove3);border-radius:50%;animation:rot 0.7s linear infinite;flex-shrink:0}
 @keyframes rot{to{transform:rotate(360deg)}}
 
-/* STATUS */
-.smsg{border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:10px;display:none;align-items:center;gap:8px}
+/* ── STATUS MSG ── */
+.smsg{border-radius:10px;padding:11px 14px;font-size:13px;margin-bottom:12px;display:none;align-items:center;gap:9px;font-weight:500}
 .smsg.on{display:flex}
-.smsg.loading{background:#fff8e6;color:#7a5c10;border:1px solid rgba(201,168,76,0.3)}
-.smsg.error{background:#fff0f0;color:var(--red);border:1px solid rgba(184,50,50,0.2)}
-.smsg.ok{background:#f0fff6;color:var(--green);border:1px solid rgba(42,122,69,0.2)}
+.smsg.loading{background:#fff8e6;color:#7a5200;border:1.5px solid rgba(201,168,76,0.35)}
+.smsg.error{background:#fef0ee;color:var(--red);border:1.5px solid rgba(192,57,43,0.2)}
+.smsg.ok{background:#edfaf3;color:#1e8449;border:1.5px solid rgba(39,174,96,0.25)}
 
-/* PREVIEW */
-.preview{display:flex;gap:12px;background:white;border:2px solid var(--gold);border-radius:var(--r);padding:12px;margin-bottom:12px}
-.prev-img{width:76px;height:76px;border-radius:8px;object-fit:cover;flex-shrink:0}
-.prev-ph{width:76px;height:76px;border-radius:8px;flex-shrink:0;background:var(--groove);position:relative;overflow:hidden}
+/* ── PREVIEW CARD ── */
+.preview{display:flex;gap:14px;background:white;border:2px solid var(--gold);border-radius:var(--r);padding:14px;margin-bottom:14px;box-shadow:0 4px 16px rgba(201,168,76,0.12)}
+.prev-img{width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.prev-ph{width:80px;height:80px;border-radius:10px;flex-shrink:0;background:var(--groove);position:relative;overflow:hidden}
 .prev-ph::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70%;height:70%;border-radius:50%;background:conic-gradient(#111 0deg 45deg,#1e1e1e 45deg 90deg,#111 90deg 135deg,#1e1e1e 135deg 180deg,#111 180deg 225deg,#1e1e1e 225deg 270deg,#111 270deg 315deg,#1e1e1e 315deg 360deg)}
 .prev-ph::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18%;height:18%;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px #080402}
 .prev-info{flex:1;min-width:0}
-.prev-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;line-height:1.2;margin-bottom:3px}
-.prev-artist{font-size:13px;color:var(--ink2);margin-bottom:8px}
-.prev-chips{display:flex;flex-wrap:wrap;gap:4px}
-.chip{border-radius:20px;padding:3px 9px;font-size:11px;font-weight:500}
-.chip-g{background:rgba(201,168,76,0.15);color:#7a5c10;border:1px solid rgba(201,168,76,0.3)}
-.chip-n{background:var(--paper2);color:var(--ink2)}
+.prev-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;line-height:1.25;margin-bottom:3px}
+.prev-artist{font-size:13px;color:var(--ink2);margin-bottom:9px}
+.prev-chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;letter-spacing:0.02em}
+.chip-g{background:rgba(201,168,76,0.15);color:#7a5200;border:1px solid rgba(201,168,76,0.35)}
+.chip-n{background:var(--paper2);color:var(--ink2);border:1px solid var(--paper3)}
 
-/* FIELDS */
+/* ── FORM FIELDS ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .fld{margin-bottom:10px}
-.fld label{display:block;font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:5px}
-.fld input{width:100%;padding:12px 13px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:16px;background:white;color:var(--ink);outline:none;-webkit-appearance:none}
-.fld input:focus{border-color:var(--groove2)}
+.fld.full{grid-column:1/-1}
+.fld label{display:block;font-size:10px;font-weight:700;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px}
+.fld-select,.fld input,.fld textarea,.fld select{width:100%;padding:11px 13px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;background:white;color:var(--ink);outline:none;-webkit-appearance:none;transition:border-color 0.2s}
+.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--groove3)}
 .fld input.auto{border-color:var(--gold);background:#fffdf5}
-.divider{height:1px;background:var(--paper3);margin:4px 0 12px}
+.fld textarea{resize:vertical;min-height:72px;font-size:13px;line-height:1.55}
+.divider{height:1px;background:var(--paper3);margin:6px 0 14px}
 
-/* COVER UPLOAD */
-.cover-upload-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.cover-preview-thumb{width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--paper2);border:2px solid var(--paper3)}
-.cover-upload-lbl{flex:1;padding:10px 14px;border:2px dashed var(--paper3);border-radius:var(--rs);font-size:13px;color:var(--ink3);cursor:pointer;text-align:center;display:block}
+.cover-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.cover-mini{width:50px;height:50px;border-radius:9px;object-fit:cover;flex-shrink:0;background:var(--paper2);border:2px solid var(--paper3);display:none}
+.cover-lbl{flex:1;padding:10px 14px;border:2px dashed var(--paper3);border-radius:var(--rs);font-size:13px;color:var(--ink3);cursor:pointer;text-align:center;display:block;transition:border-color 0.2s}
+.cover-lbl:hover{border-color:var(--groove3);color:var(--ink2)}
 
-/* BUTTONS */
-.btn{padding:14px;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;width:100%;display:block;text-align:center;margin-bottom:8px}
-.btn-gold{background:var(--gold);color:var(--groove);font-weight:700}
+.btn{padding:14px;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;border:none;width:100%;display:block;text-align:center;margin-bottom:10px;transition:all 0.15s;letter-spacing:0.01em}
+.btn:active{transform:scale(0.98)}
+.btn-gold{background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 100%);color:var(--groove);box-shadow:0 4px 16px rgba(201,168,76,0.35)}
 .btn-ghost{background:transparent;border:2px solid var(--paper3);color:var(--ink2);font-size:13px;padding:11px}
 
-/* COLLECTION */
-.coll-wrap{padding:14px}
-.sbar{display:flex;gap:8px;margin-bottom:12px;align-items:center}
-.sinp-w{flex:1;position:relative}
-.sinp{width:100%;padding:11px 14px 11px 38px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;background:white;color:var(--ink);outline:none;-webkit-appearance:none}
-.sinp:focus{border-color:var(--groove2)}
-.sico{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:0.3;pointer-events:none}
-.gsel{padding:11px 8px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:white;color:var(--ink);outline:none;-webkit-appearance:none;cursor:pointer;max-width:90px}
-.vtw{display:flex;gap:3px;background:var(--paper2);border-radius:8px;padding:3px;flex-shrink:0}
-.vt{background:none;border:none;width:34px;height:34px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3)}
-.vt.active{background:white;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
-.vt svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.vc{background:white;border-radius:var(--r);overflow:hidden;border:2px solid var(--paper3);cursor:pointer}
+/* ── COLLECTION ── */
+.coll-wrap{padding:16px 24px 0}
+
+.filter-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filter-search{flex:1;min-width:180px;position:relative}
+.filter-search input{width:100%;padding:10px 14px 10px 38px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:14px;background:white;color:var(--ink);outline:none;-webkit-appearance:none;transition:border-color 0.2s}
+.filter-search input:focus{border-color:var(--groove3)}
+.filter-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:0.3;pointer-events:none;width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.filter-selects{display:flex;gap:6px;flex-wrap:wrap}
+.filter-sel{padding:10px 10px;border:2px solid var(--paper3);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:white;color:var(--ink);outline:none;-webkit-appearance:none;cursor:pointer;max-width:110px}
+
+.view-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.coll-count{font-size:12px;color:var(--ink3);font-weight:500}
+.vtw{display:flex;gap:3px;background:var(--paper2);border-radius:9px;padding:3px}
+.vt{background:none;border:none;width:34px;height:34px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);transition:all 0.15s}
+.vt.active{background:white;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,0.12)}
+.vt svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── GRID: responsive columns ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}}
+
+.vc{background:white;border-radius:var(--r);overflow:hidden;border:2px solid var(--paper3);cursor:pointer;transition:all 0.18s}
+.vc:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.1);transform:translateY(-2px)}
+.vc:active{transform:scale(0.97)}
 .vc-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--paper2)}
 .vc-ph{width:100%;aspect-ratio:1;background:var(--groove);position:relative;overflow:hidden}
-.vc-ph::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72%;height:72%;border-radius:50%;background:conic-gradient(#111 0deg 30deg,#1a1a1a 30deg 60deg,#111 60deg 90deg,#1a1a1a 90deg 120deg,#111 120deg 150deg,#1a1a1a 150deg 180deg,#111 180deg 210deg,#1a1a1a 210deg 240deg,#111 240deg 270deg,#1a1a1a 270deg 300deg,#111 300deg 330deg,#1a1a1a 330deg 360deg)}
-.vc-ph::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18%;height:18%;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px #080402}
-.vc-body{padding:9px 10px 11px}
-.vc-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;line-height:1.3;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vc-artist{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.vc-year{font-size:10px;color:var(--ink3)}
-.li{display:flex;align-items:center;gap:11px;background:white;border:2px solid var(--paper3);border-radius:var(--rs);padding:10px 12px;cursor:pointer;margin-bottom:8px}
-.li-img{width:50px;height:50px;border-radius:7px;object-fit:cover;flex-shrink:0;background:var(--paper2)}
-.li-ph{width:50px;height:50px;border-radius:7px;flex-shrink:0;background:var(--groove)}
+.vc-ph::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72%;height:72%;border-radius:50%;background:conic-gradient(#0d0d0d 0deg 30deg,#1a1a1a 30deg 60deg,#0d0d0d 60deg 90deg,#1a1a1a 90deg 120deg,#0d0d0d 120deg 150deg,#1a1a1a 150deg 180deg,#0d0d0d 180deg 210deg,#1a1a1a 210deg 240deg,#0d0d0d 240deg 270deg,#1a1a1a 270deg 300deg,#0d0d0d 300deg 330deg,#1a1a1a 330deg 360deg)}
+.vc-ph::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18%;height:18%;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px #040200}
+.vc-body{padding:10px 11px 12px}
+.vc-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vc-artist{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.vc-meta{font-size:10px;color:var(--ink3);display:flex;gap:6px}
+
+/* ── LIST VIEW ── */
+.li{display:flex;align-items:center;gap:12px;background:white;border:2px solid var(--paper3);border-radius:var(--rs);padding:11px 14px;cursor:pointer;margin-bottom:9px;transition:all 0.15s}
+.li:hover{border-color:var(--gold);box-shadow:0 3px 12px rgba(0,0,0,0.08)}
+.li:active{background:var(--paper2)}
+.li-img{width:54px;height:54px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--paper2)}
+.li-ph{width:54px;height:54px;border-radius:8px;flex-shrink:0;background:var(--groove)}
 .li-info{flex:1;min-width:0}
-.li-title{font-weight:500;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.li-artist{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.li-r{text-align:right;flex-shrink:0}
-.li-year{font-size:11px;color:var(--ink3)}
-.li-genre{font-size:10px;color:var(--gold);font-weight:600;margin-top:2px}
-.empty{text-align:center;padding:60px 24px;color:var(--ink3)}
-.empty-d{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;opacity:0.3;background:conic-gradient(#ccc 0deg 30deg,#ddd 30deg 60deg,#ccc 60deg 90deg,#ddd 90deg 120deg,#ccc 120deg 150deg,#ddd 150deg 180deg,#ccc 180deg 210deg,#ddd 210deg 240px,#ccc 240deg 270deg,#ddd 270deg 300deg,#ccc 300deg 330deg,#ddd 330deg 360deg);position:relative}
-.empty-d::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22%;height:22%;border-radius:50%;background:#bbb;box-shadow:0 0 0 4px var(--paper)}
-.empty-t{font-family:'Playfair Display',serif;font-size:18px;color:var(--ink2);margin-bottom:6px}
-.empty-s{font-size:13px;line-height:1.6}
+.li-title{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-artist{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.li-tracks{font-size:11px;color:var(--ink3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-r{text-align:right;flex-shrink:0;min-width:54px}
+.li-year{font-size:12px;color:var(--ink);font-weight:600}
+.li-genre{font-size:10px;color:var(--gold);font-weight:700;margin-top:2px}
+.li-country{font-size:10px;color:var(--ink3);margin-top:1px}
 
-/* STATS */
-.stats-wrap{padding:14px}
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.sc{background:white;border:2px solid var(--paper3);border-radius:var(--r);padding:14px}
-.sn{font-family:'Playfair Display',serif;font-size:30px;color:var(--groove);font-weight:700;line-height:1}
-.sl{font-size:10px;color:var(--ink3);letter-spacing:0.07em;text-transform:uppercase;margin-top:4px}
-.ss{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:10px}
-.br{margin-bottom:8px}
-.bh{font-size:12px;color:var(--ink2);margin-bottom:3px;display:flex;justify-content:space-between}
-.bb{height:7px;background:var(--paper2);border-radius:4px;overflow:hidden}
-.bf{height:100%;background:var(--groove);border-radius:4px}
+.empty{text-align:center;padding:70px 30px;color:var(--ink3)}
+.empty-d{width:90px;height:90px;border-radius:50%;margin:0 auto 20px;opacity:0.25;background:conic-gradient(#ccc 0deg 30deg,#ddd 30deg 60deg,#ccc 60deg 90deg,#ddd 90deg 120deg,#ccc 120deg 150deg,#ddd 150deg 180deg,#ccc 180deg 210deg,#ddd 210deg 240deg,#ccc 240deg 270deg,#ddd 270deg 300deg,#ccc 300deg 330deg,#ddd 330deg 360deg);position:relative}
+.empty-d::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22%;height:22%;border-radius:50%;background:#bbb;box-shadow:0 0 0 5px var(--paper)}
+.empty-t{font-family:'Playfair Display',serif;font-size:20px;color:var(--ink2);margin-bottom:8px}
+.empty-s{font-size:14px;line-height:1.6}
 
-/* MODAL */
-.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:300;align-items:flex-end;justify-content:center}
+/* ── STATS ── */
+.stats-wrap{padding:20px 24px 0}
+.stats-top-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+@media(min-width:600px){.stats-top-row{grid-template-columns:repeat(4,1fr)}}
+.sc{background:white;border:2px solid var(--paper3);border-radius:var(--r);padding:16px 14px;position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;right:-10px;bottom:-10px;width:60px;height:60px;border-radius:50%;background:rgba(201,168,76,0.06)}
+.sn{font-family:'Playfair Display',serif;font-size:34px;color:var(--groove);font-weight:700;line-height:1}
+.sl{font-size:10px;color:var(--ink3);letter-spacing:0.07em;text-transform:uppercase;margin-top:5px;font-weight:600}
+.stats-section{margin-bottom:24px}
+.stats-section-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--paper3)}
+
+/* DONUT CHART */
+.donut-wrap{display:flex;align-items:center;gap:20px}
+.donut-svg{flex-shrink:0}
+.donut-legend{flex:1;display:flex;flex-direction:column;gap:8px}
+.legend-row{display:flex;align-items:center;gap:8px;font-size:12px}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.legend-label{flex:1;color:var(--ink2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.legend-val{color:var(--ink3);font-weight:600;font-size:11px}
+
+/* BUBBLE CHART */
+.bubble-wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end}
+.bubble{border-radius:50%;background:linear-gradient(135deg,var(--gold) 0%,var(--groove3) 100%);display:flex;align-items:center;justify-content:center;cursor:default;position:relative;flex-shrink:0;transition:transform 0.2s}
+.bubble:hover{transform:scale(1.08)}
+.bubble-label{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--groove);color:#f5ead0;font-size:10px;font-weight:600;padding:3px 7px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.2s;z-index:10}
+.bubble:hover .bubble-label{opacity:1}
+.bubble-text{color:white;font-size:10px;font-weight:700;text-align:center;line-height:1.2;padding:4px}
+
+/* COUNTRY MAP BARS */
+.country-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.country-flag{font-size:18px;flex-shrink:0;width:28px;text-align:center}
+.country-name{font-size:12px;color:var(--ink2);font-weight:500;min-width:70px;flex-shrink:0}
+.country-track{flex:1;height:8px;background:var(--paper2);border-radius:4px;overflow:hidden}
+.country-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--groove3),var(--gold))}
+.country-count{font-size:11px;color:var(--ink3);font-weight:600;flex-shrink:0;min-width:20px;text-align:right}
+
+/* ── MODAL ── */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;align-items:flex-end;justify-content:center}
 .mbg.open{display:flex}
-.mbox{background:white;border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.mhandle{width:36px;height:4px;background:var(--paper3);border-radius:2px;margin:12px auto 0}
-.mcovw{width:100%;aspect-ratio:1;max-height:260px;overflow:hidden;background:var(--groove);display:flex;align-items:center;justify-content:center;position:relative}
+@media(min-width:600px){.mbg{align-items:center}}
+.mbox{background:white;border-radius:22px 22px 0 0;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+@media(min-width:600px){.mbox{border-radius:22px;max-height:88vh}}
+.mhandle{width:36px;height:4px;background:var(--paper3);border-radius:2px;margin:14px auto 0}
+@media(min-width:600px){.mhandle{display:none}}
+.mcovw{width:100%;aspect-ratio:16/7;overflow:hidden;background:var(--groove);display:flex;align-items:center;justify-content:center;position:relative}
 .mcov{width:100%;height:100%;object-fit:cover}
-.mcov-ph{width:130px;height:130px;border-radius:50%;background:conic-gradient(#222 0deg 30deg,#333 30deg 60deg,#222 60deg 90deg,#333 90deg 120deg,#222 120deg 150deg,#333 150deg 180deg,#222 180deg 210deg,#333 210deg 240deg,#222 240deg 270deg,#333 270deg 300deg,#222 300deg 330deg,#333 330deg 360deg);position:relative}
-.mcov-ph::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:24%;height:24%;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px #080402}
+.mcov-ph{width:120px;height:120px;border-radius:50%;background:conic-gradient(#1a1a1a 0deg 30deg,#2a2a2a 30deg 60deg,#1a1a1a 60deg 90deg,#2a2a2a 90deg 120deg,#1a1a1a 120deg 150deg,#2a2a2a 150deg 180deg,#1a1a1a 180deg 210deg,#2a2a2a 210deg 240deg,#1a1a1a 240deg 270deg,#2a2a2a 270deg 300deg,#1a1a1a 300deg 330deg,#2a2a2a 330deg 360deg);position:relative}
+.mcov-ph::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:24%;height:24%;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px #040200}
 .mclose{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,0.45);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;line-height:1}
-.mbody{padding:18px 20px 36px}
-.mtitle{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1.2;margin-bottom:3px}
-.martist{font-size:15px;color:var(--ink2);margin-bottom:14px}
-.mrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--paper2);font-size:13px}
-.mrow:last-of-type{border-bottom:none}
-.mkey{color:var(--ink3);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
-.mval{color:var(--ink);text-align:right;max-width:65%}
-.mchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
-.mdel{width:100%;margin-top:16px;padding:13px;border-radius:var(--rs);border:2px solid rgba(184,50,50,0.25);background:rgba(184,50,50,0.06);color:var(--red);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer}
+.mbody{padding:20px 22px 36px}
+.mtitle{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:3px}
+.martist{font-size:16px;color:var(--ink2);margin-bottom:16px}
+.mrows{border-top:1px solid var(--paper3);margin-bottom:14px}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--paper3);font-size:13px}
+.mkey{color:var(--ink3);font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.mval{color:var(--ink);text-align:right;max-width:60%;font-weight:500}
+.mchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.mbtn-row{display:flex;gap:8px;margin-top:10px}
+.mbtn{flex:1;padding:12px;border-radius:var(--rs);border:2px solid var(--paper3);background:var(--paper2);color:var(--ink2);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all 0.15s}
+.mbtn:hover{border-color:var(--groove3);color:var(--groove)}
+.mbtn-del{border-color:rgba(192,57,43,0.25);background:rgba(192,57,43,0.06);color:var(--red)}
+.mbtn-del:hover{border-color:var(--red)}
 
-/* DETAIL */
-.det-btn{width:100%;margin-top:12px;padding:12px;border-radius:var(--rs);border:2px solid var(--paper3);background:var(--paper2);color:var(--ink2);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-align:center}
-.det-panel{margin-top:12px;display:none;border-top:1px solid var(--paper3);padding-top:12px}
+/* ── DETAIL PANEL ── */
+.det-panel{margin-top:14px;border-top:2px solid var(--paper3);padding-top:16px;display:none}
 .det-panel.open{display:block}
-.det-lbl{font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
-.det-info{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:16px}
-.track{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--paper2)}
+.det-section-title{font-size:10px;font-weight:700;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px}
+.det-info-text{font-size:13px;color:var(--ink2);line-height:1.75;white-space:pre-wrap;margin-bottom:18px;padding:12px;background:var(--paper2);border-radius:10px}
+.track{display:flex;align-items:baseline;gap:10px;padding:8px 0;border-bottom:1px solid var(--paper2)}
 .track:last-child{border-bottom:none}
-.track-num{font-size:11px;color:var(--ink3);min-width:22px;text-align:right;font-weight:500}
-.track-name{flex:1;font-size:13px;color:var(--ink)}
-.track-dur{font-size:11px;color:var(--ink3)}
+.track-num{font-size:11px;color:var(--ink3);min-width:22px;text-align:right;font-weight:600;flex-shrink:0}
+.track-name{flex:1;font-size:13px;color:var(--ink);font-weight:500}
+.track-dur{font-size:11px;color:var(--ink3);flex-shrink:0;font-weight:500}
+.total-dur{font-size:12px;color:var(--ink3);text-align:right;margin-top:10px;font-weight:600;padding-top:8px;border-top:1px solid var(--paper3)}
 
-/* EXPORT MODAL */
-.xbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;align-items:flex-end;justify-content:center}
+/* ── EDIT MODAL ── */
+.edit-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:400;align-items:flex-end;justify-content:center}
+.edit-bg.open{display:flex}
+@media(min-width:600px){.edit-bg{align-items:center}}
+.edit-box{background:white;border-radius:22px 22px 0 0;width:100%;max-width:560px;max-height:94vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:22px;padding-bottom:calc(22px + var(--sb))}
+@media(min-width:600px){.edit-box{border-radius:22px;max-height:86vh}}
+.edit-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.edit-hdr-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
+.edit-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink3);line-height:1;padding:4px}
+.track-edit-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;animation:fadeIn 0.15s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.track-edit-row input{flex:1;padding:9px 12px;border:1.5px solid var(--paper3);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:14px;background:white;color:var(--ink);outline:none;-webkit-appearance:none;transition:border-color 0.2s}
+.track-edit-row input:focus{border-color:var(--groove3)}
+.dur-inp{max-width:72px;flex:none !important}
+.track-num-badge{font-size:11px;color:var(--ink3);min-width:20px;text-align:right;font-weight:600;flex-shrink:0}
+.track-del-btn{width:28px;height:28px;border-radius:50%;border:none;background:rgba(192,57,43,0.1);color:var(--red);cursor:pointer;font-size:15px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
+.track-del-btn:hover{background:rgba(192,57,43,0.2)}
+.add-track-btn{width:100%;padding:10px;border:2px dashed var(--paper3);border-radius:9px;background:none;color:var(--ink3);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:6px;transition:all 0.15s}
+.add-track-btn:hover{border-color:var(--groove3);color:var(--ink2)}
+.edit-section-sep{font-size:10px;font-weight:700;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin:16px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--paper3)}
+.edit-save{width:100%;margin-top:18px;padding:14px;border-radius:var(--rs);background:linear-gradient(135deg,var(--groove) 0%,var(--groove2) 100%);color:#f5ead0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:opacity 0.15s}
+.edit-save:hover{opacity:0.88}
+
+/* ── EXPORT MODAL ── */
+.xbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:500;align-items:flex-end;justify-content:center}
 .xbg.open{display:flex}
-.xbox{background:white;border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px;padding-bottom:calc(20px + var(--sb))}
-.xta{width:100%;height:140px;border:2px solid var(--paper3);border-radius:10px;padding:10px;font-size:11px;font-family:monospace;resize:none;background:var(--paper);color:var(--ink);margin-top:10px}
+@media(min-width:600px){.xbg{align-items:center}}
+.xbox{background:white;border-radius:22px 22px 0 0;width:100%;max-width:500px;padding:22px;padding-bottom:calc(22px + var(--sb))}
+@media(min-width:600px){.xbox{border-radius:22px}}
+.xta{width:100%;height:130px;border:2px solid var(--paper3);border-radius:10px;padding:10px;font-size:11px;font-family:monospace;resize:none;background:var(--paper);color:var(--ink);margin-top:10px}
 </style>
 </head>
 <body>
 <div class="shell">
   <div class="hdr">
-    <div class="hdr-row">
+    <div class="hdr-inner">
       <div class="logo">
         <div class="vdisk"></div>
-        <div><div class="logo-text">Mi Coleccion</div><div class="logo-sub">Vinilos</div></div>
+        <div>
+          <div class="logo-text">Mi Coleccion</div>
+          <div class="logo-sub">Vinilos</div>
+        </div>
       </div>
       <div class="hdr-right">
         <div class="cpill" id="countPill">0 discos</div>
@@ -220,10 +322,11 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;flex-directi
   </div>
 
   <div class="scroll" id="scrollArea">
-    <!-- ADD -->
+
+    <!-- ── ADD ── -->
     <div class="view active" id="view-add">
       <div class="add-wrap">
-        <div class="slbl">Artista o grupo</div>
+        <div class="section-label">Artista o grupo</div>
         <div class="acw" id="acw-artist">
           <svg class="aci-il" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <input class="aci" id="in-artist" type="text" placeholder="Artista o grupo..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
@@ -231,7 +334,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;flex-directi
           <div class="dd" id="dd-artist"></div>
         </div>
 
-        <div class="slbl">Album</div>
+        <div class="section-label">Album</div>
         <div class="acw" id="acw-album">
           <svg class="aci-il" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
           <input class="aci" id="in-album" type="text" placeholder="Titulo del album..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
@@ -244,32 +347,41 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;flex-directi
 
         <div id="det-fields" style="display:none">
           <div class="divider"></div>
-          <div class="fld"><label>Ano</label><input type="text" id="in-year" inputmode="numeric" placeholder="--"></div>
-          <div class="fld"><label>Genero</label><input type="text" id="in-genre" placeholder="--"></div>
-          <div class="fld"><label>Sello</label><input type="text" id="in-label" placeholder="--"></div>
-          <div class="fld"><label>Notas</label><input type="text" id="in-notes" placeholder="Edicion especial, estado..."></div>
-          <div class="cover-upload-row">
-            <img id="cover-thumb" class="cover-preview-thumb" src="" alt="" style="display:none">
-            <label class="cover-upload-lbl" for="cover-file">Subir portada manualmente</label>
+          <div class="form-grid">
+            <div class="fld"><label>Ano</label><input type="text" id="in-year" inputmode="numeric" placeholder="--"></div>
+            <div class="fld"><label>Pais de origen</label><select id="in-country" class="fld-select"><option value="">-- Seleccionar pais --</option><option value="Alemania">🇩🇪 Alemania</option><option value="Arabia Saudi">🇸🇦 Arabia Saudi</option><option value="Argentina">🇦🇷 Argentina</option><option value="Australia">🇦🇺 Australia</option><option value="Austria">🇦🇹 Austria</option><option value="Belgica">🇧🇪 Belgica</option><option value="Bolivia">🇧🇴 Bolivia</option><option value="Brasil">🇧🇷 Brasil</option><option value="Canada">🇨🇦 Canada</option><option value="Chile">🇨🇱 Chile</option><option value="China">🇨🇳 China</option><option value="Colombia">🇨🇴 Colombia</option><option value="Corea del Sur">🇰🇷 Corea del Sur</option><option value="Costa Rica">🇨🇷 Costa Rica</option><option value="Cuba">🇨🇺 Cuba</option><option value="Dinamarca">🇩🇰 Dinamarca</option><option value="Ecuador">🇪🇨 Ecuador</option><option value="Egipto">🇪🇬 Egipto</option><option value="Espana">🇪🇸 Espana</option><option value="Estados Unidos">🇺🇸 Estados Unidos</option><option value="Etiopia">🇪🇹 Etiopia</option><option value="Finlandia">🇫🇮 Finlandia</option><option value="Francia">🇫🇷 Francia</option><option value="Ghana">🇬🇭 Ghana</option><option value="Grecia">🇬🇷 Grecia</option><option value="Guatemala">🇬🇹 Guatemala</option><option value="Honduras">🇭🇳 Honduras</option><option value="Hungria">🇭🇺 Hungria</option><option value="India">🇮🇳 India</option><option value="Indonesia">🇮🇩 Indonesia</option><option value="Irlanda">🇮🇪 Irlanda</option><option value="Israel">🇮🇱 Israel</option><option value="Italia">🇮🇹 Italia</option><option value="Jamaica">🇯🇲 Jamaica</option><option value="Japon">🇯🇵 Japon</option><option value="Kenya">🇰🇪 Kenya</option><option value="Malasia">🇲🇾 Malasia</option><option value="Mali">🇲🇱 Mali</option><option value="Marruecos">🇲🇦 Marruecos</option><option value="Mexico">🇲🇽 Mexico</option><option value="Nigeria">🇳🇬 Nigeria</option><option value="Noruega">🇳🇴 Noruega</option><option value="Nueva Zelanda">🇳🇿 Nueva Zelanda</option><option value="Paises Bajos">🇳🇱 Paises Bajos</option><option value="Panama">🇵🇦 Panama</option><option value="Paraguay">🇵🇾 Paraguay</option><option value="Peru">🇵🇪 Peru</option><option value="Polonia">🇵🇱 Polonia</option><option value="Portugal">🇵🇹 Portugal</option><option value="Puerto Rico">🇵🇷 Puerto Rico</option><option value="Reino Unido">🇬🇧 Reino Unido</option><option value="Republica Dominicana">🇩🇴 Republica Dominicana</option><option value="Rumania">🇷🇴 Rumania</option><option value="Rusia">🇷🇺 Rusia</option><option value="Senegal">🇸🇳 Senegal</option><option value="Sudafrica">🇿🇦 Sudafrica</option><option value="Suecia">🇸🇪 Suecia</option><option value="Suiza">🇨🇭 Suiza</option><option value="Tailandia">🇹🇭 Tailandia</option><option value="Turquia">🇹🇷 Turquia</option><option value="Ucrania">🇺🇦 Ucrania</option><option value="Uruguay">🇺🇾 Uruguay</option><option value="Venezuela">🇻🇪 Venezuela</option><option value="Vietnam">🇻🇳 Vietnam</option></select></div>
+            <div class="fld"><label>Genero</label><input type="text" id="in-genre" placeholder="Rock, Jazz..."></div>
+            <div class="fld"><label>Sello</label><input type="text" id="in-label" placeholder="Columbia..."></div>
+            <div class="fld full"><label>Notas</label><input type="text" id="in-notes" placeholder="Edicion especial, estado..."></div>
+          </div>
+          <div class="cover-row">
+            <img id="cover-mini" class="cover-mini" src="" alt="">
+            <label class="cover-lbl" for="cover-file">Subir portada manualmente</label>
           </div>
         </div>
 
         <div id="add-btn-wrap" style="display:none">
-          <button class="btn btn-gold" onclick="addToCollection()">Anadir a mi coleccion</button>
+          <button class="btn btn-gold" onclick="addToCollection()">+ Anadir a mi coleccion</button>
         </div>
-        <button class="btn btn-ghost" id="btn-manual" onclick="addManually()">Anadir sin busqueda</button>
+        <button class="btn btn-ghost" id="btn-manual" onclick="addManually()">Anadir sin busqueda automatica</button>
       </div>
     </div>
 
-    <!-- COLLECTION -->
+    <!-- ── COLLECTION ── -->
     <div class="view" id="view-collection">
       <div class="coll-wrap">
-        <div class="sbar">
-          <div class="sinp-w">
-            <svg class="sico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <input class="sinp" id="filter-q" placeholder="Buscar..." oninput="renderColl()">
+        <div class="filter-bar">
+          <div class="filter-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="filter-q" placeholder="Buscar por titulo, artista o cancion..." oninput="renderColl()">
           </div>
-          <select class="gsel" id="filter-genre" onchange="renderColl()"><option value="">Genero</option></select>
+          <div class="filter-selects">
+            <select class="filter-sel" id="filter-genre" onchange="renderColl()"><option value="">Genero</option></select>
+            <select class="filter-sel" id="filter-country" onchange="renderColl()"><option value="">Pais</option></select>
+          </div>
+        </div>
+        <div class="view-bar">
+          <div class="coll-count" id="coll-count"></div>
           <div class="vtw">
             <button class="vt active" id="vt-grid" onclick="setVM('grid')">
               <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -283,11 +395,12 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;flex-directi
       </div>
     </div>
 
-    <!-- STATS -->
+    <!-- ── STATS ── -->
     <div class="view" id="view-stats">
       <div class="stats-wrap" id="stats-body"></div>
     </div>
-  </div>
+
+  </div><!-- /scroll -->
 
   <nav class="nav">
     <button class="nb active" id="nb-add" onclick="switchTab('add')">
@@ -305,25 +418,51 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;flex-directi
   </nav>
 </div>
 
-<!-- MODAL -->
+<!-- ALBUM MODAL -->
 <div class="mbg" id="modal-bg">
   <div class="mbox"><div class="mhandle"></div><div id="modal-inner"></div></div>
+</div>
+
+<!-- EDIT DETAIL MODAL -->
+<div class="edit-bg" id="edit-bg">
+  <div class="edit-box">
+    <div class="edit-hdr">
+      <div class="edit-hdr-title" id="edit-title-lbl">Editar disco</div>
+      <button class="edit-close" onclick="closeEditModal()">x</button>
+    </div>
+    <div class="edit-section-sep">Informacion basica</div>
+    <div class="form-grid">
+      <div class="fld"><label>Ano</label><input type="text" id="edit-year" inputmode="numeric" placeholder="--"></div>
+      <div class="fld"><label>Pais de origen</label><select id="edit-country" class="fld-select"><option value="">-- Seleccionar --</option></select></div>
+      <div class="fld"><label>Genero</label><input type="text" id="edit-genre" placeholder="Rock, Jazz..."></div>
+      <div class="fld"><label>Sello</label><input type="text" id="edit-label" placeholder="Columbia..."></div>
+      <div class="fld full"><label>Notas</label><input type="text" id="edit-notes" placeholder="Edicion especial, estado..."></div>
+    </div>
+    <div class="edit-section-sep">Descripcion</div>
+    <div class="fld">
+      <textarea id="edit-info" placeholder="Contexto, curiosidades, datos interesantes..."></textarea>
+    </div>
+    <div class="edit-section-sep">Tracklist</div>
+    <div id="track-list-edit"></div>
+    <button class="add-track-btn" onclick="addTrackRow()">+ Anadir cancion</button>
+    <button class="edit-save" onclick="saveDetail()">Guardar cambios</button>
+  </div>
 </div>
 
 <!-- EXPORT MODAL -->
 <div class="xbg" id="xbg">
   <div class="xbox">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <strong>Exportar coleccion</strong>
+      <strong style="font-family:'Playfair Display',serif;font-size:17px">Exportar coleccion</strong>
       <button onclick="document.getElementById('xbg').classList.remove('open')" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink3)">x</button>
     </div>
-    <p style="font-size:12px;color:var(--ink3)">Copia este JSON e importalo en otro dispositivo</p>
+    <p style="font-size:12px;color:var(--ink3);line-height:1.5">Copia este JSON e importalo en otro dispositivo para sincronizar tu coleccion</p>
     <textarea class="xta" id="xta" readonly></textarea>
-    <button onclick="copyExport()" style="width:100%;margin-top:10px;padding:13px;border-radius:var(--rs);background:var(--gold);color:var(--groove);font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif">Copiar al portapapeles</button>
+    <button onclick="copyExport()" style="width:100%;margin-top:10px;padding:14px;border-radius:var(--rs);background:linear-gradient(135deg,var(--groove),var(--groove2));color:#f5ead0;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif">Copiar al portapapeles</button>
   </div>
 </div>
 
-<!-- FILE INPUTS (hidden) -->
+<!-- FILE INPUTS -->
 <input type="file" id="imp-file" accept=".json" style="display:none">
 <input type="file" id="cover-file" accept="image/*" style="display:none">
 
@@ -337,18 +476,71 @@ var timerA = null;
 var timerB = null;
 var artistResults = [];
 var albumResults = [];
-/* Flag: true while finger is touching a dropdown row */
 var ddTouching = false;
+var editingAlbumId = null;
+
+var ALL_COUNTRIES = [
+  {name:'Alemania',flag:'🇩🇪'},{name:'Arabia Saudi',flag:'🇸🇦'},{name:'Argentina',flag:'🇦🇷'},
+  {name:'Australia',flag:'🇦🇺'},{name:'Austria',flag:'🇦🇹'},{name:'Belgica',flag:'🇧🇪'},
+  {name:'Bolivia',flag:'🇧🇴'},{name:'Brasil',flag:'🇧🇷'},{name:'Canada',flag:'🇨🇦'},
+  {name:'Chile',flag:'🇨🇱'},{name:'China',flag:'🇨🇳'},{name:'Colombia',flag:'🇨🇴'},
+  {name:'Corea del Sur',flag:'🇰🇷'},{name:'Costa Rica',flag:'🇨🇷'},{name:'Cuba',flag:'🇨🇺'},
+  {name:'Dinamarca',flag:'🇩🇰'},{name:'Ecuador',flag:'🇪🇨'},{name:'Egipto',flag:'🇪🇬'},
+  {name:'Espana',flag:'🇪🇸'},{name:'Estados Unidos',flag:'🇺🇸'},{name:'Etiopia',flag:'🇪🇹'},
+  {name:'Finlandia',flag:'🇫🇮'},{name:'Francia',flag:'🇫🇷'},{name:'Ghana',flag:'🇬🇭'},
+  {name:'Grecia',flag:'🇬🇷'},{name:'Guatemala',flag:'🇬🇹'},{name:'Honduras',flag:'🇭🇳'},
+  {name:'Hungria',flag:'🇭🇺'},{name:'India',flag:'🇮🇳'},{name:'Indonesia',flag:'🇮🇩'},
+  {name:'Irlanda',flag:'🇮🇪'},{name:'Israel',flag:'🇮🇱'},{name:'Italia',flag:'🇮🇹'},
+  {name:'Jamaica',flag:'🇯🇲'},{name:'Japon',flag:'🇯🇵'},{name:'Kenya',flag:'🇰🇪'},
+  {name:'Malasia',flag:'🇲🇾'},{name:'Mali',flag:'🇲🇱'},{name:'Marruecos',flag:'🇲🇦'},
+  {name:'Mexico',flag:'🇲🇽'},{name:'Nigeria',flag:'🇳🇬'},{name:'Noruega',flag:'🇳🇴'},
+  {name:'Nueva Zelanda',flag:'🇳🇿'},{name:'Paises Bajos',flag:'🇳🇱'},{name:'Panama',flag:'🇵🇦'},
+  {name:'Paraguay',flag:'🇵🇾'},{name:'Peru',flag:'🇵🇪'},{name:'Polonia',flag:'🇵🇱'},
+  {name:'Portugal',flag:'🇵🇹'},{name:'Puerto Rico',flag:'🇵🇷'},{name:'Reino Unido',flag:'🇬🇧'},
+  {name:'Republica Dominicana',flag:'🇩🇴'},{name:'Rumania',flag:'🇷🇴'},{name:'Rusia',flag:'🇷🇺'},
+  {name:'Senegal',flag:'🇸🇳'},{name:'Sudafrica',flag:'🇿🇦'},{name:'Suecia',flag:'🇸🇪'},
+  {name:'Suiza',flag:'🇨🇭'},{name:'Tailandia',flag:'🇹🇭'},{name:'Turquia',flag:'🇹🇷'},
+  {name:'Ucrania',flag:'🇺🇦'},{name:'Uruguay',flag:'🇺🇾'},{name:'Venezuela',flag:'🇻🇪'},
+  {name:'Vietnam',flag:'🇻🇳'}
+];
 
 var ITUNES = 'https://itunes.apple.com/search';
 var DEEZER  = 'https://api.deezer.com';
 
+/* Country flag emoji map */
+var FLAGS = {
+  'US':'🇺🇸','USA':'🇺🇸','United States':'🇺🇸','Estados Unidos':'🇺🇸',
+  'UK':'🇬🇧','GB':'🇬🇧','United Kingdom':'🇬🇧','Reino Unido':'🇬🇧','England':'🇬🇧',
+  'ES':'🇪🇸','Spain':'🇪🇸','Espana':'🇪🇸','España':'🇪🇸',
+  'DE':'🇩🇪','Germany':'🇩🇪','Alemania':'🇩🇪',
+  'FR':'🇫🇷','France':'🇫🇷','Francia':'🇫🇷',
+  'IT':'🇮🇹','Italy':'🇮🇹','Italia':'🇮🇹',
+  'JP':'🇯🇵','Japan':'🇯🇵','Japon':'🇯🇵',
+  'BR':'🇧🇷','Brazil':'🇧🇷','Brasil':'🇧🇷',
+  'AR':'🇦🇷','Argentina':'🇦🇷',
+  'MX':'🇲🇽','Mexico':'🇲🇽','México':'🇲🇽',
+  'CA':'🇨🇦','Canada':'🇨🇦',
+  'AU':'🇦🇺','Australia':'🇦🇺',
+  'SE':'🇸🇪','Sweden':'🇸🇪','Suecia':'🇸🇪',
+  'NO':'🇳🇴','Norway':'🇳🇴','Noruega':'🇳🇴',
+  'NL':'🇳🇱','Netherlands':'🇳🇱','Holanda':'🇳🇱',
+  'PT':'🇵🇹','Portugal':'🇵🇹',
+  'CU':'🇨🇺','Cuba':'🇨🇺',
+  'CO':'🇨🇴','Colombia':'🇨🇴',
+  'CL':'🇨🇱','Chile':'🇨🇱',
+  'RU':'🇷🇺','Russia':'🇷🇺','Rusia':'🇷🇺'
+};
+
+function getFlag(country) {
+  if (!country) return '';
+  var f = FLAGS[country.trim()];
+  return f ? f : '';
+}
+
 /* ═══════════════ INIT ═══════════════ */
 function init() {
   var raw = localStorage.getItem('vinyl_collection');
-  if (raw) {
-    try { collection = JSON.parse(raw); } catch(e) { collection = []; }
-  }
+  if (raw) { try { collection = JSON.parse(raw); } catch(e) { collection = []; } }
   updateCount();
   switchTab('add');
   setupDropdowns();
@@ -383,20 +575,15 @@ function setStatus(msg, type) {
   el.className = 'smsg on ' + type;
   if (type === 'loading') {
     el.innerHTML = '<div class="spin"></div>' + esc(msg);
-  } else {
-    el.textContent = msg;
-  }
-  if (type === 'ok') {
-    setTimeout(function() { el.classList.remove('on'); }, 3000);
-  }
+  } else { el.textContent = msg; }
+  if (type === 'ok') { setTimeout(function() { el.classList.remove('on'); }, 3000); }
 }
 function clearStatus() { document.getElementById('smsg').classList.remove('on'); }
 
-/* ═══════════════ DROPDOWN HELPERS ═══════════════ */
+/* ═══════════════ DROPDOWNS ═══════════════ */
 function openDd(id) { document.getElementById(id).classList.add('open'); }
 function closeDd(id) { document.getElementById(id).classList.remove('open'); }
 function closeAllDd() { closeDd('dd-artist'); closeDd('dd-album'); }
-
 function ddLoading(id, msg) {
   var el = document.getElementById(id);
   el.innerHTML = '<div class="dd-msg"><div class="spin"></div>' + esc(msg) + '</div>';
@@ -408,72 +595,55 @@ function ddEmpty(id, msg) {
   el.classList.add('open');
 }
 
-/* ═══════════════ DROPDOWN SETUP ═══════════════════════════════════════════
-   Strategy: intercept touchstart/mousedown on the acw containers at capture
-   phase. This fires BEFORE the input blur. We set ddTouching=true so the
-   blur handler knows not to close the dropdown.
-══════════════════════════════════════════════════════════════════════════ */
+/* ── Capture-phase listeners on .acw containers ── */
 function setupDropdowns() {
-  setupOneDd('acw-artist', 'dd-artist', function(idx) { pickArtist(artistResults[idx]); });
-  setupOneDd('acw-album',  'dd-album',  function(idx) { pickAlbum(albumResults[idx]); });
+  setupOneDd('acw-artist', function(idx) { pickArtist(artistResults[idx]); });
+  setupOneDd('acw-album',  function(idx) { pickAlbum(albumResults[idx]); });
 }
 
-function setupOneDd(acwId, ddId, pickFn) {
+function setupOneDd(acwId, pickFn) {
   var acw = document.getElementById(acwId);
-
-  function handlePick(e) {
+  function doHandle(e) {
     var target = e.target;
     var row = null;
     while (target && target !== acw) {
-      if (target.getAttribute && target.getAttribute('data-idx') !== null && target.classList.contains('dd-row')) {
-        row = target; break;
-      }
+      if (target.classList && target.classList.contains('dd-row') && target.getAttribute('data-idx') !== null) { row = target; break; }
       target = target.parentElement;
     }
     if (!row) return;
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     ddTouching = true;
     var idx = parseInt(row.getAttribute('data-idx'), 10);
     pickFn(idx);
-    setTimeout(function() { ddTouching = false; }, 600);
+    setTimeout(function() { ddTouching = false; }, 700);
   }
-
-  acw.addEventListener('touchstart', handlePick, { capture: true, passive: false });
-  acw.addEventListener('mousedown',  handlePick, true);
+  acw.addEventListener('touchstart', doHandle, { capture: true, passive: false });
+  acw.addEventListener('mousedown',  doHandle, true);
 }
 
-/* ═══════════════ ARTIST ═══════════════ */
+/* ═══════════════ ARTIST SEARCH ═══════════════ */
 var inArtist = document.getElementById('in-artist');
 
 inArtist.addEventListener('input', function() {
   var v = this.value;
   document.getElementById('clr-artist').classList.toggle('show', v.length > 0);
-  lockedArtist = '';
-  resetPreview();
-  closeDd('dd-album');
+  lockedArtist = ''; resetPreview(); closeDd('dd-album');
   clearTimeout(timerA);
   if (v.trim().length < 2) { closeDd('dd-artist'); return; }
   timerA = setTimeout(function() { fetchArtists(inArtist.value.trim()); }, 400);
 });
-
 inArtist.addEventListener('blur', function() {
-  setTimeout(function() { if (!ddTouching) closeDd('dd-artist'); }, 400);
+  setTimeout(function() { if (!ddTouching) closeDd('dd-artist'); }, 500);
 });
-
 document.getElementById('clr-artist').addEventListener('click', function() {
   inArtist.value = ''; inArtist.classList.remove('filled');
-  this.classList.remove('show'); lockedArtist = '';
-  closeDd('dd-artist'); resetPreview();
+  this.classList.remove('show'); lockedArtist = ''; closeDd('dd-artist'); resetPreview();
 });
 
 function fetchArtists(q) {
   ddLoading('dd-artist', 'Buscando artistas...');
   artistResults = [];
-  var results = [];
-  var seen = {};
-  var pending1 = 2;
-
+  var results = [], seen = {}, pending1 = 2;
   function tryFinish() {
     pending1--;
     if (pending1 > 0) return;
@@ -487,72 +657,57 @@ function fetchArtists(q) {
         : '<div class="dd-thumb-ph"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
       html += '<div class="dd-row" data-idx="' + i + '">' + thumb +
         '<div class="dd-info"><div class="dd-main">' + esc(a.name) + '</div>' +
-        (a.sub ? '<div class="dd-sub">' + esc(a.sub) + '</div>' : '') +
-        '</div></div>';
+        (a.sub ? '<div class="dd-sub">' + esc(a.sub) + '</div>' : '') + '</div></div>';
     }
     document.getElementById('dd-artist').innerHTML = html;
     openDd('dd-artist');
   }
-
   fetch(DEEZER + '/search/artist?q=' + encodeURIComponent(q) + '&limit=6')
     .then(function(r) { return r.json(); })
     .then(function(d) {
       var items = (d && d.data) ? d.data : [];
       for (var i = 0; i < items.length; i++) {
-        var name = items[i].name || '';
-        var k = name.toLowerCase();
-        if (!name || seen[k]) continue;
-        seen[k] = true;
+        var name = items[i].name || '', k = name.toLowerCase();
+        if (!name || seen[k]) continue; seen[k] = true;
         results.push({ name: name, sub: '', pic: items[i].picture_small || '' });
       }
-    })
-    .catch(function() {})
-    .then(function() { tryFinish(); });
-
+    }).catch(function(){}).then(function() { tryFinish(); });
   fetch(ITUNES + '?term=' + encodeURIComponent(q) + '&media=music&entity=musicArtist&limit=6')
     .then(function(r) { return r.json(); })
     .then(function(d) {
       var items = (d && d.results) ? d.results : [];
       for (var i = 0; i < items.length; i++) {
-        var name = items[i].artistName || '';
-        var k = name.toLowerCase();
-        if (!name || seen[k]) continue;
-        seen[k] = true;
+        var name = items[i].artistName || '', k = name.toLowerCase();
+        if (!name || seen[k]) continue; seen[k] = true;
         results.push({ name: name, sub: items[i].primaryGenreName || '', pic: '' });
       }
-    })
-    .catch(function() {})
-    .then(function() { tryFinish(); });
+    }).catch(function(){}).then(function() { tryFinish(); });
 }
 
 function pickArtist(a) {
   if (!a) return;
   inArtist.value = a.name; inArtist.classList.add('filled');
   document.getElementById('clr-artist').classList.add('show');
-  lockedArtist = a.name;
-  closeDd('dd-artist'); resetPreview();
+  lockedArtist = a.name; closeDd('dd-artist'); resetPreview();
   var albumVal = document.getElementById('in-album').value.trim();
   if (albumVal.length >= 2) fetchAlbums(a.name, albumVal);
   else document.getElementById('in-album').focus();
 }
 
-/* ═══════════════ ALBUM ═══════════════ */
+/* ═══════════════ ALBUM SEARCH ═══════════════ */
 var inAlbum = document.getElementById('in-album');
 
 inAlbum.addEventListener('input', function() {
   var v = this.value;
   document.getElementById('clr-album').classList.toggle('show', v.length > 0);
-  resetPreview();
-  clearTimeout(timerB);
+  resetPreview(); clearTimeout(timerB);
   if (v.trim().length < 2) { closeDd('dd-album'); return; }
   var artist = lockedArtist || inArtist.value.trim();
   timerB = setTimeout(function() { fetchAlbums(artist, inAlbum.value.trim()); }, 420);
 });
-
 inAlbum.addEventListener('blur', function() {
-  setTimeout(function() { if (!ddTouching) closeDd('dd-album'); }, 400);
+  setTimeout(function() { if (!ddTouching) closeDd('dd-album'); }, 500);
 });
-
 document.getElementById('clr-album').addEventListener('click', function() {
   inAlbum.value = ''; inAlbum.classList.remove('filled');
   this.classList.remove('show'); closeDd('dd-album'); resetPreview();
@@ -561,14 +716,8 @@ document.getElementById('clr-album').addEventListener('click', function() {
 function fetchAlbums(artist, album) {
   ddLoading('dd-album', 'Buscando albums...');
   albumResults = [];
-  var results = [];
-  var seen = {};
-  var pending1 = 2;
-
-  function normKey(t, a) {
-    return (t + '|' + a).toLowerCase().replace(/\s/g, '');
-  }
-
+  var results = [], seen = {}, pending1 = 2;
+  function normKey(t, a) { return (t + '|' + a).toLowerCase().replace(/\s/g,''); }
   function tryFinish() {
     pending1--;
     if (pending1 > 0) return;
@@ -592,57 +741,41 @@ function fetchAlbums(artist, album) {
       html += '<div class="dd-row" data-idx="' + i + '">' + thumb +
         '<div class="dd-info"><div class="dd-main">' + esc(a.title) + '</div>' +
         '<div class="dd-sub">' + esc(sub) + '</div></div>' +
-        (a.year ? '<div class="dd-badge">' + a.year + '</div>' : '') +
-        '</div>';
+        (a.year ? '<div class="dd-badge">' + a.year + '</div>' : '') + '</div>';
     }
     document.getElementById('dd-album').innerHTML = html;
     openDd('dd-album');
   }
-
   var dq = artist ? (artist + ' ' + album) : album;
   fetch(DEEZER + '/search/album?q=' + encodeURIComponent(dq) + '&limit=8')
     .then(function(r) { return r.json(); })
     .then(function(d) {
       var items = (d && d.data) ? d.data : [];
       for (var i = 0; i < items.length; i++) {
-        var t = items[i].title || '';
-        var ar = (items[i].artist && items[i].artist.name) ? items[i].artist.name : '';
+        var t = items[i].title || '', ar = (items[i].artist && items[i].artist.name) ? items[i].artist.name : '';
         var k = normKey(t, ar);
-        if (!t || seen[k]) continue;
-        seen[k] = true;
+        if (!t || seen[k]) continue; seen[k] = true;
         var yr = items[i].release_date ? items[i].release_date.substring(0, 4) : '';
-        results.push({
-          title: t, artist: ar, year: yr, genre: '',
+        results.push({ title: t, artist: ar, year: yr, genre: '',
           cover: items[i].cover_medium || items[i].cover || '',
-          coverBig: items[i].cover_xl || items[i].cover_big || items[i].cover_medium || ''
-        });
+          coverBig: items[i].cover_xl || items[i].cover_big || items[i].cover_medium || '',
+          deezerId: items[i].id || null });
       }
-    })
-    .catch(function() {})
-    .then(function() { tryFinish(); });
-
+    }).catch(function(){}).then(function() { tryFinish(); });
   var iq = artist ? (artist + ' ' + album) : album;
   fetch(ITUNES + '?term=' + encodeURIComponent(iq) + '&media=music&entity=album&limit=8')
     .then(function(r) { return r.json(); })
     .then(function(d) {
       var items = (d && d.results) ? d.results : [];
       for (var i = 0; i < items.length; i++) {
-        var t = items[i].collectionName || '';
-        var ar = items[i].artistName || '';
+        var t = items[i].collectionName || '', ar = items[i].artistName || '';
         var k = normKey(t, ar);
-        if (!t || seen[k]) continue;
-        seen[k] = true;
-        var c100 = items[i].artworkUrl100 || '';
-        var yr = items[i].releaseDate ? items[i].releaseDate.substring(0, 4) : '';
-        results.push({
-          title: t, artist: ar, year: yr, genre: items[i].primaryGenreName || '',
-          cover: c100,
-          coverBig: c100.replace('100x100bb', '600x600bb')
-        });
+        if (!t || seen[k]) continue; seen[k] = true;
+        var c100 = items[i].artworkUrl100 || '', yr = items[i].releaseDate ? items[i].releaseDate.substring(0, 4) : '';
+        results.push({ title: t, artist: ar, year: yr, genre: items[i].primaryGenreName || '',
+          cover: c100, coverBig: c100.replace('100x100bb','600x600bb') });
       }
-    })
-    .catch(function() {})
-    .then(function() { tryFinish(); });
+    }).catch(function(){}).then(function() { tryFinish(); });
 }
 
 function pickAlbum(a) {
@@ -653,50 +786,42 @@ function pickAlbum(a) {
   lockedArtist = a.artist;
   inAlbum.value = a.title; inAlbum.classList.add('filled');
   document.getElementById('clr-album').classList.add('show');
-
   var fy = document.getElementById('in-year');
   var fg = document.getElementById('in-genre');
   fy.value = a.year; fy.classList.add('auto');
   fg.value = a.genre; fg.classList.add('auto');
   document.getElementById('in-label').value = '';
-
+  document.getElementById('in-country').value = '';
   fy.addEventListener('input', function() { this.classList.remove('auto'); }, false);
   fg.addEventListener('input', function() { this.classList.remove('auto'); }, false);
-
-  pending = {
-    id: Date.now(), title: a.title, artist: a.artist, year: a.year,
-    genres: a.genre ? [a.genre] : [], label: '',
+  pending = { id: Date.now(), title: a.title, artist: a.artist, year: a.year,
+    genres: a.genre ? [a.genre] : [], label: '', country: '',
     coverUrl: a.coverBig || a.cover || null, notes: '',
-    addedDate: new Date().toLocaleDateString('es-ES')
-  };
-  clearStatus();
-  showPreview(pending);
+    tracklist: [], detailInfo: '', addedDate: new Date().toLocaleDateString('es-ES') };
+  clearStatus(); showPreview(pending);
+  /* Auto-fetch tracklist from Deezer if album has a Deezer ID */
+  if (a.deezerId) fetchTracklist(a.deezerId);
 }
 
-/* ═══════════════ COVER UPLOAD ═══════════════ */
+/* ═══════════════ FILE INPUTS ═══════════════ */
 function setupFileInputs() {
   document.getElementById('cover-file').addEventListener('change', function() {
-    var file = this.files[0];
-    if (!file) return;
+    var file = this.files[0]; if (!file) return;
     var reader = new FileReader();
     reader.onload = function(e) {
-      var dataUrl = e.target.result;
-      if (pending) pending.coverUrl = dataUrl;
-      var thumb = document.getElementById('cover-thumb');
-      if (thumb) { thumb.src = dataUrl; thumb.style.display = 'block'; }
-      /* update preview card */
-      var prevImg = document.querySelector('#preview-wrap .prev-img');
-      if (prevImg) prevImg.src = dataUrl;
-      var prevPh = document.querySelector('#preview-wrap .prev-ph');
-      if (prevPh) { prevPh.outerHTML = '<img class="prev-img" src="' + dataUrl + '" alt="">'; }
+      var url = e.target.result;
+      if (pending) pending.coverUrl = url;
+      var mini = document.getElementById('cover-mini');
+      if (mini) { mini.src = url; mini.style.display = 'block'; }
+      var ph = document.querySelector('#preview-wrap .prev-ph');
+      if (ph) ph.outerHTML = '<img class="prev-img" src="' + url + '" alt="">';
+      var pi = document.querySelector('#preview-wrap .prev-img');
+      if (pi) pi.src = url;
     };
-    reader.readAsDataURL(file);
-    this.value = '';
+    reader.readAsDataURL(file); this.value = '';
   });
-
   document.getElementById('imp-file').addEventListener('change', function() {
-    var file = this.files[0];
-    if (!file) return;
+    var file = this.files[0]; if (!file) return;
     var reader = new FileReader();
     reader.onload = function(e) {
       try {
@@ -704,24 +829,18 @@ function setupFileInputs() {
         if (!Array.isArray(data)) throw new Error('Formato incorrecto');
         var added = 0;
         for (var i = 0; i < data.length; i++) {
-          var item = data[i];
-          var dup = false;
+          var item = data[i], dup = false;
           for (var j = 0; j < collection.length; j++) {
             if (collection[j].title.toLowerCase() === item.title.toLowerCase() &&
-                collection[j].artist.toLowerCase() === item.artist.toLowerCase()) {
-              dup = true; break;
-            }
+                collection[j].artist.toLowerCase() === item.artist.toLowerCase()) { dup = true; break; }
           }
           if (!dup) { collection.push(item); added++; }
         }
         collection.sort(function(a, b) { return b.id - a.id; });
-        saveLocal(); updateCount();
-        alert(added + ' disco(s) importado(s).');
-        renderColl();
+        saveLocal(); updateCount(); alert(added + ' disco(s) importado(s).'); renderColl();
       } catch(err) { alert('Error al importar: ' + err.message); }
     };
-    reader.readAsText(file);
-    this.value = '';
+    reader.readAsText(file); this.value = '';
   });
 }
 
@@ -741,7 +860,7 @@ function showPreview(a) {
   document.getElementById('det-fields').style.display = 'block';
   document.getElementById('add-btn-wrap').style.display = 'block';
   document.getElementById('btn-manual').style.display = 'none';
-  document.getElementById('cover-thumb').style.display = 'none';
+  document.getElementById('cover-mini').style.display = 'none';
 }
 
 function resetPreview() {
@@ -750,19 +869,22 @@ function resetPreview() {
   document.getElementById('det-fields').style.display = 'none';
   document.getElementById('add-btn-wrap').style.display = 'none';
   document.getElementById('btn-manual').style.display = 'block';
-  var fields = ['in-year','in-genre','in-label','in-notes'];
-  for (var i = 0; i < fields.length; i++) {
-    var el = document.getElementById(fields[i]);
+  var flds = ['in-year','in-genre','in-label','in-notes'];
+  for (var i = 0; i < flds.length; i++) {
+    var el = document.getElementById(flds[i]);
     el.value = ''; el.classList.remove('auto');
   }
-  document.getElementById('cover-thumb').style.display = 'none';
+  var csel = document.getElementById('in-country'); if (csel) csel.value = '';
+  document.getElementById('cover-mini').style.display = 'none';
   clearStatus();
 }
 
 function addManually() {
   var artist = inArtist.value.trim(), title = inAlbum.value.trim();
   if (!artist || !title) { setStatus('Introduce artista y album primero', 'error'); return; }
-  pending = { id: Date.now(), title: title, artist: artist, year: '', genres: [], label: '', coverUrl: null, notes: '', addedDate: new Date().toLocaleDateString('es-ES') };
+  pending = { id: Date.now(), title: title, artist: artist, year: '', genres: [],
+    label: '', country: '', coverUrl: null, notes: '',
+    tracklist: [], detailInfo: '', addedDate: new Date().toLocaleDateString('es-ES') };
   document.getElementById('det-fields').style.display = 'block';
   document.getElementById('add-btn-wrap').style.display = 'block';
   document.getElementById('btn-manual').style.display = 'none';
@@ -770,14 +892,14 @@ function addManually() {
 
 function addToCollection() {
   if (!pending) { setStatus('Nada pendiente', 'error'); return; }
-  pending.year  = document.getElementById('in-year').value.trim() || pending.year;
-  pending.label = document.getElementById('in-label').value.trim() || pending.label;
-  pending.notes = document.getElementById('in-notes').value.trim();
+  pending.year    = document.getElementById('in-year').value.trim() || pending.year;
+  pending.label   = document.getElementById('in-label').value.trim() || pending.label;
+  pending.notes   = document.getElementById('in-notes').value.trim();
+  pending.country = document.getElementById('in-country').value.trim();
   var gr = document.getElementById('in-genre').value.trim();
   if (gr) {
-    pending.genres = gr.split(',');
-    for (var i = 0; i < pending.genres.length; i++) pending.genres[i] = pending.genres[i].trim();
-    pending.genres = pending.genres.filter(function(s) { return s.length > 0; });
+    var parts = gr.split(','); pending.genres = [];
+    for (var i = 0; i < parts.length; i++) { var p = parts[i].trim(); if (p) pending.genres.push(p); }
   }
   for (var i = 0; i < collection.length; i++) {
     if (collection[i].title.toLowerCase() === pending.title.toLowerCase() &&
@@ -785,15 +907,72 @@ function addToCollection() {
       setStatus('Este disco ya esta en tu coleccion', 'error'); return;
     }
   }
-  collection.unshift(pending);
-  saveLocal(); updateCount();
+  collection.unshift(pending); saveLocal(); updateCount();
   inArtist.value = ''; inArtist.classList.remove('filled');
   inAlbum.value  = ''; inAlbum.classList.remove('filled');
   lockedArtist   = '';
   document.getElementById('clr-artist').classList.remove('show');
   document.getElementById('clr-album').classList.remove('show');
-  resetPreview();
-  setStatus('Disco anadido correctamente', 'ok');
+  resetPreview(); setStatus('Disco anadido correctamente', 'ok');
+}
+
+/* Auto-fetch tracklist from Deezer when album is selected */
+function fetchTracklist(deezerId) {
+  if (!deezerId || !pending) return;
+  setStatus('Cargando tracklist...', 'loading');
+  fetch(DEEZER + '/album/' + deezerId)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d || !d.tracks || !d.tracks.data || !d.tracks.data.length) {
+        clearStatus(); return;
+      }
+      var tracks = [];
+      for (var i = 0; i < d.tracks.data.length; i++) {
+        var t = d.tracks.data[i];
+        var sec = t.duration || 0;
+        var dur = sec ? Math.floor(sec/60) + ':' + (sec%60 < 10 ? '0' : '') + (sec%60) : '';
+        tracks.push({ name: t.title || '', duration: dur });
+      }
+      if (pending) {
+        pending.tracklist = tracks;
+        /* Update preview chips to show track count */
+        var wrap = document.getElementById('preview-wrap');
+        if (wrap) {
+          var old = wrap.querySelector('.prev-chips');
+          if (old) {
+            var badge = document.createElement('span');
+            badge.className = 'chip chip-n';
+            badge.textContent = tracks.length + ' canciones';
+            old.appendChild(badge);
+          }
+        }
+      }
+      setStatus(tracks.length + ' canciones cargadas automaticamente', 'ok');
+    })
+    .catch(function() { clearStatus(); });
+}
+
+/* ═══════════════ DURATION UTIL ═══════════════ */
+function parseDuration(str) {
+  /* returns seconds from "M:SS" or "H:MM:SS" */
+  if (!str) return 0;
+  var parts = String(str).split(':');
+  var s = 0;
+  for (var i = 0; i < parts.length; i++) s = s * 60 + parseInt(parts[i], 10);
+  return isNaN(s) ? 0 : s;
+}
+function formatDuration(sec) {
+  if (!sec) return '';
+  var m = Math.floor(sec / 60), s = sec % 60;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+function albumTotalDuration(a) {
+  var tracks = a.tracklist || [], total = 0;
+  for (var i = 0; i < tracks.length; i++) {
+    var t = tracks[i], dur = (typeof t === 'object') ? (t.duration || '') : '';
+    total += parseDuration(dur);
+  }
+  return total;
 }
 
 /* ═══════════════ COLLECTION ═══════════════ */
@@ -801,33 +980,68 @@ function renderColl() {
   var el = document.getElementById('coll-grid');
   var q = (document.getElementById('filter-q').value || '').toLowerCase();
   var genre = document.getElementById('filter-genre').value;
-  var gSeen = {}, allGenres = [];
+  var country = document.getElementById('filter-country').value;
+
+  /* Build genre/country select options */
+  var gSeen = {}, cSeen = {}, allGenres = [], allCountries = [];
   for (var i = 0; i < collection.length; i++) {
-    var gs = collection[i].genres || [];
-    for (var j = 0; j < gs.length; j++) {
-      if (!gSeen[gs[j]]) { gSeen[gs[j]] = true; allGenres.push(gs[j]); }
-    }
+    var a = collection[i];
+    var gs = a.genres || [];
+    for (var j = 0; j < gs.length; j++) { if (!gSeen[gs[j]]) { gSeen[gs[j]] = true; allGenres.push(gs[j]); } }
+    if (a.country && !cSeen[a.country]) { cSeen[a.country] = true; allCountries.push(a.country); }
   }
-  allGenres.sort();
-  var sel = document.getElementById('filter-genre'), cur = sel.value;
-  var opts = '<option value="">Genero</option>';
-  for (var i = 0; i < allGenres.length; i++) {
-    opts += '<option value="' + esc(allGenres[i]) + '"' + (allGenres[i] === cur ? ' selected' : '') + '>' + esc(allGenres[i]) + '</option>';
+  allGenres.sort(); allCountries.sort();
+
+  var gSel = document.getElementById('filter-genre'), gCur = gSel.value;
+  var gOpts = '<option value="">Genero</option>';
+  for (var i = 0; i < allGenres.length; i++) gOpts += '<option value="' + esc(allGenres[i]) + '"' + (allGenres[i]===gCur?' selected':'') + '>' + esc(allGenres[i]) + '</option>';
+  gSel.innerHTML = gOpts;
+
+  var cSel = document.getElementById('filter-country'), cCur = cSel.value;
+  var cOpts = '<option value="">Pais</option>';
+  for (var i = 0; i < allCountries.length; i++) {
+    var flag = getFlag(allCountries[i]);
+    cOpts += '<option value="' + esc(allCountries[i]) + '"' + (allCountries[i]===cCur?' selected':'') + '>' + flag + ' ' + esc(allCountries[i]) + '</option>';
   }
-  sel.innerHTML = opts;
+  cSel.innerHTML = cOpts;
+
+  /* Filter */
   var filtered = [];
   for (var i = 0; i < collection.length; i++) {
     var a = collection[i];
-    var mq = !q || (a.title + ' ' + a.artist).toLowerCase().indexOf(q) >= 0;
+    var searchStr = (a.title + ' ' + a.artist).toLowerCase();
+    /* also search within tracklist names */
+    var tracks = a.tracklist || [];
+    for (var j = 0; j < tracks.length; j++) {
+      var tname = (typeof tracks[j] === 'string') ? tracks[j] : (tracks[j].name || '');
+      searchStr += ' ' + tname.toLowerCase();
+    }
+    var mq = !q || searchStr.indexOf(q) >= 0;
     var mg = !genre || (a.genres && a.genres.indexOf(genre) >= 0);
-    if (mq && mg) filtered.push(a);
+    var mc = !country || a.country === country;
+    if (mq && mg && mc) filtered.push(a);
   }
+
+  /* Count label */
+  var countEl = document.getElementById('coll-count');
+  if (countEl) countEl.textContent = filtered.length + ' de ' + collection.length + ' discos';
+
   if (!filtered.length) {
     el.innerHTML = collection.length === 0
-      ? '<div class="empty"><div class="empty-d"></div><div class="empty-t">Coleccion vacia</div><div class="empty-s">Anade tu primer vinilo</div></div>'
-      : '<div class="empty"><div class="empty-s">Sin resultados.</div></div>';
+      ? '<div class="empty"><div class="empty-d"></div><div class="empty-t">Coleccion vacia</div><div class="empty-s">Anade tu primer vinilo desde la pestana Anadir</div></div>'
+      : '<div class="empty"><div class="empty-s">Sin resultados para ese filtro.</div></div>';
     return;
   }
+
+  /* Sort alphabetically by artist, then by title */
+  filtered.sort(function(a, b) {
+    var aa = a.artist.toLowerCase(), ba = b.artist.toLowerCase();
+    if (aa < ba) return -1; if (aa > ba) return 1;
+    var at = a.title.toLowerCase(), bt = b.title.toLowerCase();
+    if (at < bt) return -1; if (at > bt) return 1;
+    return 0;
+  });
+
   var html = vm === 'grid' ? '<div class="grid">' : '<div>';
   for (var i = 0; i < filtered.length; i++) {
     html += vm === 'grid' ? cardHtml(filtered[i]) : listHtml(filtered[i]);
@@ -839,10 +1053,17 @@ function cardHtml(a) {
   var cov = a.coverUrl
     ? '<img class="vc-img" src="' + a.coverUrl + '" alt="">'
     : '<div class="vc-ph"></div>';
+  var g0 = (a.genres && a.genres.length) ? a.genres[0] : '';
+  var flag = getFlag(a.country);
   return '<div class="vc" onclick="openModal(' + a.id + ')">' + cov +
-    '<div class="vc-body"><div class="vc-title">' + esc(a.title) + '</div>' +
+    '<div class="vc-body">' +
+    '<div class="vc-title">' + esc(a.title) + '</div>' +
     '<div class="vc-artist">' + esc(a.artist) + '</div>' +
-    '<div class="vc-year">' + (a.year || '--') + '</div></div></div>';
+    '<div class="vc-meta">' +
+    (a.year ? '<span>' + esc(a.year) + '</span>' : '') +
+    (g0 ? '<span style="color:var(--gold)">' + esc(g0) + '</span>' : '') +
+    (flag ? '<span>' + flag + '</span>' : '') +
+    '</div></div></div>';
 }
 
 function listHtml(a) {
@@ -850,9 +1071,22 @@ function listHtml(a) {
     ? '<img class="li-img" src="' + a.coverUrl + '" alt="">'
     : '<div class="li-ph"></div>';
   var g0 = (a.genres && a.genres.length) ? a.genres[0] : '';
+  var tracks = a.tracklist || [];
+  var trackStr = tracks.length ? tracks.length + ' canciones' : '';
+  var totalSec = albumTotalDuration(a);
+  if (totalSec && trackStr) trackStr += ' · ' + formatDuration(totalSec);
+  var flag = getFlag(a.country);
   return '<div class="li" onclick="openModal(' + a.id + ')">' + cov +
-    '<div class="li-info"><div class="li-title">' + esc(a.title) + '</div><div class="li-artist">' + esc(a.artist) + '</div></div>' +
-    '<div class="li-r"><div class="li-year">' + (a.year || '--') + '</div><div class="li-genre">' + esc(g0) + '</div></div></div>';
+    '<div class="li-info">' +
+    '<div class="li-title">' + esc(a.title) + '</div>' +
+    '<div class="li-artist">' + esc(a.artist) + '</div>' +
+    (trackStr ? '<div class="li-tracks">' + esc(trackStr) + '</div>' : '') +
+    '</div>' +
+    '<div class="li-r">' +
+    '<div class="li-year">' + (a.year || '--') + '</div>' +
+    (g0 ? '<div class="li-genre">' + esc(g0) + '</div>' : '') +
+    (a.country ? '<div class="li-country">' + flag + ' ' + esc(a.country) + '</div>' : '') +
+    '</div></div>';
 }
 
 function setVM(m) {
@@ -869,81 +1103,54 @@ function findAlbum(id) {
 }
 
 function openModal(id) {
-  var a = findAlbum(id);
-  if (!a) return;
+  var a = findAlbum(id); if (!a) return;
   var cov = a.coverUrl
     ? '<div class="mcovw"><img class="mcov" src="' + a.coverUrl + '" alt=""><button class="mclose" onclick="closeModal()">x</button></div>'
     : '<div class="mcovw"><div class="mcov-ph"></div><button class="mclose" onclick="closeModal()">x</button></div>';
-  var rows = '';
-  if (a.year)  rows += '<div class="mrow"><span class="mkey">Ano</span><span class="mval">' + esc(a.year) + '</span></div>';
-  if (a.label) rows += '<div class="mrow"><span class="mkey">Sello</span><span class="mval">' + esc(a.label) + '</span></div>';
+
+  var totalSec = albumTotalDuration(a);
+  var rows = '<div class="mrows">';
+  if (a.year)    rows += '<div class="mrow"><span class="mkey">Ano</span><span class="mval">' + esc(a.year) + '</span></div>';
+  if (a.country) rows += '<div class="mrow"><span class="mkey">Pais</span><span class="mval">' + getFlag(a.country) + ' ' + esc(a.country) + '</span></div>';
+  if (a.label)   rows += '<div class="mrow"><span class="mkey">Sello</span><span class="mval">' + esc(a.label) + '</span></div>';
+  if (a.tracklist && a.tracklist.length) rows += '<div class="mrow"><span class="mkey">Canciones</span><span class="mval">' + a.tracklist.length + (totalSec ? ' · ' + formatDuration(totalSec) : '') + '</span></div>';
   rows += '<div class="mrow"><span class="mkey">Anadido</span><span class="mval">' + esc(a.addedDate) + '</span></div>';
-  if (a.notes) rows += '<div class="mrow"><span class="mkey">Notas</span><span class="mval">' + esc(a.notes) + '</span></div>';
+  if (a.notes)   rows += '<div class="mrow"><span class="mkey">Notas</span><span class="mval">' + esc(a.notes) + '</span></div>';
+  rows += '</div>';
+
   var chips = '';
   var gs = a.genres || [];
   for (var i = 0; i < gs.length; i++) chips += '<span class="chip chip-n">' + esc(gs[i]) + '</span>';
+
   var hasDetail = !!(a.detailInfo || (a.tracklist && a.tracklist.length));
-  var detBtnLabel = hasDetail ? 'Ver tracklist e informacion (guardado)' : 'Ver tracklist e informacion';
+  var detBtnText = hasDetail ? '&#9654; Ver tracklist e informacion' : '+ Anadir tracklist e informacion';
+
   document.getElementById('modal-inner').innerHTML =
     cov + '<div class="mbody">' +
     '<div class="mtitle">' + esc(a.title) + '</div>' +
     '<div class="martist">' + esc(a.artist) + '</div>' +
     rows +
     (chips ? '<div class="mchips">' + chips + '</div>' : '') +
-    '<button class="det-btn" id="det-toggle" onclick="toggleDetail(' + id + ')">' + detBtnLabel + '</button>' +
-    '<div class="det-panel" id="det-panel">' +
-    '<div id="det-loading" style="display:flex;align-items:center;gap:8px;padding:12px 0;color:var(--ink3);font-size:13px"><div class="spin"></div>Cargando...</div>' +
-    '<div id="det-content" style="display:none"></div>' +
+    '<div class="mbtn-row">' +
+    '<button class="mbtn" id="det-toggle-btn" onclick="toggleDetail(' + id + ')">' + detBtnText + '</button>' +
+    '<button class="mbtn" onclick="openEditDetail(' + id + ')">Editar</button>' +
+    '<button class="mbtn mbtn-del" onclick="deleteAlbum(' + id + ')">Eliminar</button>' +
     '</div>' +
-    '<button class="mdel" onclick="deleteAlbum(' + id + ')">Eliminar de mi coleccion</button>' +
+    '<div class="det-panel" id="det-panel">' + (hasDetail ? buildDetailHtml(a) : '') + '</div>' +
     '</div>';
+
   document.getElementById('modal-bg').classList.add('open');
-  if (hasDetail) renderDetail(a);
 }
 
-function closeModal() { document.getElementById('modal-bg').classList.remove('open'); }
-
-document.getElementById('modal-bg').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-
-function deleteAlbum(id) {
-  if (!confirm('Eliminar este disco?')) return;
-  var newColl = [];
-  for (var i = 0; i < collection.length; i++) { if (collection[i].id !== id) newColl.push(collection[i]); }
-  collection = newColl;
-  saveLocal(); updateCount(); closeModal(); renderColl();
-}
-
-/* ═══════════════ DETAIL / TRACKLIST ═══════════════ */
-function toggleDetail(id) {
-  var panel = document.getElementById('det-panel');
-  var btn   = document.getElementById('det-toggle');
-  if (!panel || !btn) return;
-  var isOpen = panel.classList.contains('open');
-  if (isOpen) { panel.classList.remove('open'); return; }
-  panel.classList.add('open');
-  var a = findAlbum(id);
-  if (!a) return;
-  if (a.detailInfo || (a.tracklist && a.tracklist.length)) {
-    renderDetail(a); return;
-  }
-  fetchDetail(a);
-}
-
-function renderDetail(a) {
-  var loading = document.getElementById('det-loading');
-  var content = document.getElementById('det-content');
-  if (!loading || !content) return;
-  loading.style.display = 'none';
-  content.style.display = 'block';
+function buildDetailHtml(a) {
   var html = '';
   if (a.detailInfo) {
-    html += '<div class="det-lbl">Sobre el album</div><div class="det-info">' + esc(a.detailInfo) + '</div>';
+    html += '<div class="det-section-title">Sobre el album</div>';
+    html += '<div class="det-info-text">' + esc(a.detailInfo) + '</div>';
   }
   var tracks = a.tracklist || [];
   if (tracks.length) {
-    html += '<div class="det-lbl">Tracklist</div>';
+    html += '<div class="det-section-title">Tracklist</div>';
     for (var i = 0; i < tracks.length; i++) {
       var t = tracks[i];
       var name = (typeof t === 'string') ? t : (t.name || '');
@@ -952,120 +1159,290 @@ function renderDetail(a) {
               '<span class="track-name">' + esc(name) + '</span>' +
               (dur ? '<span class="track-dur">' + esc(dur) + '</span>' : '') + '</div>';
     }
+    var totalSec = albumTotalDuration(a);
+    if (totalSec) html += '<div class="total-dur">Duracion total: ' + formatDuration(totalSec) + '</div>';
   }
-  if (!html) html = '<div style="color:var(--ink3);font-size:13px;padding:8px 0">Sin informacion disponible.</div>';
-  content.innerHTML = html;
+  return html;
 }
 
-function fetchDetail(a) {
-  var loading = document.getElementById('det-loading');
-  var content = document.getElementById('det-content');
-  if (loading) { loading.style.display = 'flex'; loading.innerHTML = '<div class="spin"></div>Consultando Claude...'; }
-  if (content) content.style.display = 'none';
+function toggleDetail(id) {
+  var panel = document.getElementById('det-panel');
+  var btn   = document.getElementById('det-toggle-btn');
+  if (!panel) return;
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+  } else {
+    panel.classList.add('open');
+    var a = findAlbum(id);
+    if (a && !a.detailInfo && !(a.tracklist && a.tracklist.length)) { openEditDetail(id); }
+  }
+}
 
-  var msgParts = [
-    'Para el album "', a.title, '" de ', a.artist,
-    a.year ? ' (' + a.year + ')' : '',
-    ', devuelve UNICAMENTE un JSON valido sin texto extra ni markdown:',
-    ' {"info":"parrafo 5-7 lineas sobre el album","tracks":[{"name":"titulo","duration":"M:SS"}]}',
-    ' Si no conoces la duracion omite ese campo. Si no conoces el album devuelve {"info":"","tracks":[]}'
-  ];
-  var msgText = msgParts.join('');
+function closeModal() { document.getElementById('modal-bg').classList.remove('open'); }
+document.getElementById('modal-bg').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
-  fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'anthropic-dangerous-allow-any-cors-origin': 'true',
-      'anthropic-version': '2023-06-01'
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      messages: [{ role: 'user', content: msgText }]
-    })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    var raw = '';
-    var blocks = (data && data.content) ? data.content : [];
-    for (var i = 0; i < blocks.length; i++) { if (blocks[i].text) raw += blocks[i].text; }
-    raw = raw.trim();
-    /* strip markdown fences if present */
-    if (raw.indexOf('```') === 0) {
-      raw = raw.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '').trim();
-    }
-    var parsed = JSON.parse(raw);
-    var idx = -1;
-    for (var i = 0; i < collection.length; i++) {
-      if (collection[i].id === a.id) { idx = i; break; }
-    }
-    if (idx >= 0) {
-      collection[idx].detailInfo = parsed.info || '';
-      collection[idx].tracklist  = parsed.tracks || [];
+function deleteAlbum(id) {
+  if (!confirm('Eliminar este disco?')) return;
+  var nc = [];
+  for (var i = 0; i < collection.length; i++) { if (collection[i].id !== id) nc.push(collection[i]); }
+  collection = nc; saveLocal(); updateCount(); closeModal(); renderColl();
+}
+
+/* ═══════════════ EDIT DETAIL ═══════════════ */
+function openEditDetail(id) {
+  var a = findAlbum(id); if (!a) return;
+  editingAlbumId = id;
+  document.getElementById('edit-title-lbl').textContent = a.title;
+  document.getElementById('edit-info').value = a.detailInfo || '';
+  document.getElementById('edit-year').value = a.year || '';
+  document.getElementById('edit-genre').value = (a.genres || []).join(', ');
+  document.getElementById('edit-label').value = a.label || '';
+  document.getElementById('edit-notes').value = a.notes || '';
+  /* Rebuild country select with current value */
+  var csel = document.getElementById('edit-country');
+  csel.innerHTML = '<option value="">-- Seleccionar pais --</option>';
+  for (var i = 0; i < ALL_COUNTRIES.length; i++) {
+    var c = ALL_COUNTRIES[i];
+    var opt = document.createElement('option');
+    opt.value = c.name; opt.textContent = c.flag + ' ' + c.name;
+    if (c.name === a.country) opt.selected = true;
+    csel.appendChild(opt);
+  }
+  renderTrackEditor(a.tracklist || []);
+  document.getElementById('edit-bg').classList.add('open');
+}
+
+function closeEditModal() { document.getElementById('edit-bg').classList.remove('open'); editingAlbumId = null; }
+
+function renderTrackEditor(tracks) {
+  var container = document.getElementById('track-list-edit');
+  var html = '';
+  for (var i = 0; i < tracks.length; i++) {
+    var t = tracks[i];
+    var name = (typeof t === 'string') ? t : (t.name || '');
+    var dur  = (typeof t === 'object') ? (t.duration || '') : '';
+    html += trackRowHtml(i, name, dur);
+  }
+  container.innerHTML = html;
+}
+
+function trackRowHtml(idx, name, dur) {
+  return '<div class="track-edit-row" id="trow-' + idx + '">' +
+    '<span class="track-num-badge">' + (idx+1) + '</span>' +
+    '<input type="text" placeholder="Nombre de la cancion" value="' + esc(name) + '" class="track-name-inp">' +
+    '<input type="text" placeholder="3:45" value="' + esc(dur) + '" class="dur-inp" inputmode="decimal">' +
+    '<button class="track-del-btn" onclick="delTrackRow(this)">x</button></div>';
+}
+
+function addTrackRow() {
+  var container = document.getElementById('track-list-edit');
+  var rows = container.querySelectorAll('.track-edit-row');
+  var div = document.createElement('div');
+  div.innerHTML = trackRowHtml(rows.length, '', '');
+  container.appendChild(div.firstChild);
+  renumberRows();
+  var newInp = container.querySelectorAll('.track-name-inp');
+  if (newInp.length) newInp[newInp.length - 1].focus();
+}
+
+function delTrackRow(btn) {
+  btn.parentElement.parentElement.removeChild(btn.parentElement);
+  renumberRows();
+}
+
+function renumberRows() {
+  var rows = document.getElementById('track-list-edit').querySelectorAll('.track-edit-row');
+  for (var i = 0; i < rows.length; i++) {
+    var nb = rows[i].querySelector('.track-num-badge');
+    if (nb) nb.textContent = (i+1);
+  }
+}
+
+function saveDetail() {
+  if (!editingAlbumId) return;
+  var info    = document.getElementById('edit-info').value.trim();
+  var year    = document.getElementById('edit-year').value.trim();
+  var country = document.getElementById('edit-country').value;
+  var label   = document.getElementById('edit-label').value.trim();
+  var notes   = document.getElementById('edit-notes').value.trim();
+  var genreRaw = document.getElementById('edit-genre').value.trim();
+  var genres = [];
+  if (genreRaw) {
+    var gparts = genreRaw.split(',');
+    for (var g = 0; g < gparts.length; g++) { var gp = gparts[g].trim(); if (gp) genres.push(gp); }
+  }
+  var rows = document.getElementById('track-list-edit').querySelectorAll('.track-edit-row');
+  var tracks = [];
+  for (var i = 0; i < rows.length; i++) {
+    var ni = rows[i].querySelector('.track-name-inp');
+    var di = rows[i].querySelector('.dur-inp');
+    var name = ni ? ni.value.trim() : '';
+    var dur  = di ? di.value.trim() : '';
+    if (name) tracks.push({ name: name, duration: dur });
+  }
+  for (var i = 0; i < collection.length; i++) {
+    if (collection[i].id === editingAlbumId) {
+      collection[i].detailInfo = info;
+      collection[i].tracklist  = tracks;
+      if (year)    collection[i].year    = year;
+      if (country) collection[i].country = country;
+      if (label)   collection[i].label   = label;
+      if (notes)   collection[i].notes   = notes;
+      if (genres.length) collection[i].genres = genres;
       saveLocal();
-      renderDetail(collection[idx]);
+      var aid = editingAlbumId;
+      closeEditModal(); closeModal(); openModal(aid);
+      return;
     }
-  })
-  .catch(function(e) {
-    if (loading) {
-      loading.style.display = 'flex';
-      loading.innerHTML = '<span style="color:var(--red);font-size:13px">Error al cargar. Abre el archivo desde un servidor (no como archivo local) para que funcione la API de Claude.</span>';
-    }
-  });
+  }
 }
 
 /* ═══════════════ STATS ═══════════════ */
+var PALETTE = ['#c9a84c','#4a2510','#7a5200','#8b6914','#2e1608','#d4a843','#5c3410','#a07830','#3d2008','#e8c46a'];
+
 function renderStats() {
   var el = document.getElementById('stats-body');
   if (!collection.length) {
-    el.innerHTML = '<div class="empty"><div class="empty-d"></div><div class="empty-t">Sin datos</div></div>';
+    el.innerHTML = '<div class="empty"><div class="empty-d"></div><div class="empty-t">Sin datos</div><div class="empty-s">Anade vinilos para ver estadisticas</div></div>';
     return;
   }
+
+  /* ── Counters ── */
+  var artists = {}, countries = {}, gc = {}, dec = {};
+  var totalTracks = 0, withTrack = 0, totalSec = 0;
   var years = [];
+
   for (var i = 0; i < collection.length; i++) {
-    if (collection[i].year) years.push(parseInt(collection[i].year, 10));
-  }
-  var avg = '--';
-  if (years.length) {
-    var sum = 0;
-    for (var i = 0; i < years.length; i++) sum += years[i];
-    avg = Math.round(sum / years.length);
-  }
-  var dec = {}, gc = {};
-  for (var i = 0; i < years.length; i++) {
-    var d = Math.floor(years[i] / 10) * 10;
-    dec[d] = (dec[d] || 0) + 1;
-  }
-  for (var i = 0; i < collection.length; i++) {
-    var gs = collection[i].genres || [];
+    var a = collection[i];
+    artists[a.artist] = true;
+    if (a.country) countries[a.country] = (countries[a.country] || 0) + 1;
+    var gs = a.genres || [];
     for (var j = 0; j < gs.length; j++) gc[gs[j]] = (gc[gs[j]] || 0) + 1;
+    if (a.year) { var y = parseInt(a.year, 10); years.push(y); var d = Math.floor(y/10)*10; dec[d] = (dec[d]||0)+1; }
+    if (a.tracklist && a.tracklist.length) {
+      withTrack++;
+      totalTracks += a.tracklist.length;
+      totalSec += albumTotalDuration(a);
+    }
   }
-  var tg = [], td = [];
-  var gkeys = Object.keys(gc);
-  for (var i = 0; i < gkeys.length; i++) tg.push([gkeys[i], gc[gkeys[i]]]);
-  tg.sort(function(a,b){return b[1]-a[1];}); tg = tg.slice(0,5);
-  var dkeys = Object.keys(dec);
-  for (var i = 0; i < dkeys.length; i++) td.push([dkeys[i], dec[dkeys[i]]]);
-  td.sort(function(a,b){return b[1]-a[1];}); td = td.slice(0,5);
-  var mg = tg.length ? tg[0][1] : 1, md = td.length ? td[0][1] : 1;
-  var artists = {};
-  for (var i = 0; i < collection.length; i++) artists[collection[i].artist] = true;
-  var html = '<div class="sgrid">' +
+
+  var nCountries = Object.keys(countries).length;
+  var totalMin = Math.round(totalSec / 60);
+  var totalHours = Math.floor(totalMin / 60);
+  var remMin = totalMin % 60;
+  var totalFormatted = totalHours > 0
+    ? totalHours + 'h ' + (remMin > 0 ? remMin + 'min' : '')
+    : (totalMin > 0 ? totalMin + 'min' : '');
+  totalFormatted = totalFormatted.trim();
+
+  /* ── Top arrays ── */
+  var tg = [], td = [], tc = [];
+  var gk = Object.keys(gc); for (var i = 0; i < gk.length; i++) tg.push([gk[i], gc[gk[i]]]);
+  tg.sort(function(a,b){return b[1]-a[1];}); tg = tg.slice(0,6);
+  var dk = Object.keys(dec); for (var i = 0; i < dk.length; i++) td.push([dk[i], dec[dk[i]]]);
+  td.sort(function(a,b){return b[1]-a[1];});
+  var ck = Object.keys(countries); for (var i = 0; i < ck.length; i++) tc.push([ck[i], countries[ck[i]]]);
+  tc.sort(function(a,b){return b[1]-a[1];}); tc = tc.slice(0,8);
+
+  var html = '';
+
+  /* ── KPI cards ── */
+  html += '<div class="stats-top-row">' +
     '<div class="sc"><div class="sn">' + collection.length + '</div><div class="sl">Vinilos</div></div>' +
     '<div class="sc"><div class="sn">' + Object.keys(artists).length + '</div><div class="sl">Artistas</div></div>' +
-    '<div class="sc"><div class="sn">' + avg + '</div><div class="sl">Ano medio</div></div>' +
-    '<div class="sc"><div class="sn">' + tg.length + '</div><div class="sl">Generos</div></div>' +
+    '<div class="sc"><div class="sn">' + nCountries + '</div><div class="sl">Paises</div></div>' +
+    '<div class="sc"><div class="sn">' + (totalFormatted ? totalFormatted : withTrack) + '</div><div class="sl">' + (totalFormatted ? 'Musica total' : 'Con tracklist') + '</div></div>' +
     '</div>';
+
+  /* ── GENRES: Donut chart ── */
   if (tg.length) {
-    html += '<div class="ss">Generos</div>';
-    for (var i = 0; i < tg.length; i++) html += '<div class="br"><div class="bh"><span>' + esc(tg[i][0]) + '</span><span>' + tg[i][1] + '</span></div><div class="bb"><div class="bf" style="width:' + Math.round(tg[i][1]/mg*100) + '%"></div></div></div>';
+    html += '<div class="stats-section"><div class="stats-section-title">Generos</div>';
+    html += buildDonut(tg);
+    html += '</div>';
   }
+
+  /* ── DECADES: Bubble chart ── */
   if (td.length) {
-    html += '<div class="ss" style="margin-top:18px">Por decadas</div>';
-    for (var i = 0; i < td.length; i++) html += '<div class="br"><div class="bh"><span>' + td[i][0] + 's</span><span>' + td[i][1] + '</span></div><div class="bb"><div class="bf" style="width:' + Math.round(td[i][1]/md*100) + '%"></div></div></div>';
+    html += '<div class="stats-section"><div class="stats-section-title">Por decadas</div>';
+    html += buildBubbles(td);
+    html += '</div>';
   }
+
+  /* ── COUNTRIES: flag bars ── */
+  if (tc.length) {
+    html += '<div class="stats-section"><div class="stats-section-title">Por pais</div>';
+    var maxC = tc[0][1];
+    for (var i = 0; i < tc.length; i++) {
+      var flag = getFlag(tc[i][0]);
+      var pct = Math.round(tc[i][1] / maxC * 100);
+      html += '<div class="country-bar-row">' +
+        '<div class="country-flag">' + (flag || '🌐') + '</div>' +
+        '<div class="country-name">' + esc(tc[i][0]) + '</div>' +
+        '<div class="country-track"><div class="country-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="country-count">' + tc[i][1] + '</div>' +
+        '</div>';
+    }
+    html += '</div>';
+  }
+
   el.innerHTML = html;
+}
+
+
+function buildCountrySelect(id, selectedValue) {
+  var opts = '<option value="">-- Seleccionar pais --</option>';
+  for (var i = 0; i < ALL_COUNTRIES.length; i++) {
+    var c = ALL_COUNTRIES[i];
+    var sel = (c.name === selectedValue) ? ' selected' : '';
+    opts += '<option value="' + esc(c.name) + '"' + sel + '>' + c.flag + ' ' + esc(c.name) + '</option>';
+  }
+  return '<select id="' + id + '" class="fld-select">' + opts + '</select>';
+}
+
+function buildDonut(data) {
+  var total = 0;
+  for (var i = 0; i < data.length; i++) total += data[i][1];
+  var r = 70, cx = 85, cy = 85, circumference = 2 * Math.PI * r;
+  var offset = 0;
+  var segments = '';
+  for (var i = 0; i < data.length; i++) {
+    var pct = data[i][1] / total;
+    var dash = pct * circumference;
+    var gap  = circumference - dash;
+    var color = PALETTE[i % PALETTE.length];
+    segments += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="28" stroke-dasharray="' + dash.toFixed(2) + ' ' + gap.toFixed(2) + '" stroke-dashoffset="' + (-(offset * circumference)).toFixed(2) + '" transform="rotate(-90,' + cx + ',' + cy + ')"/>';
+    offset += pct;
+  }
+  var legend = '';
+  for (var i = 0; i < data.length; i++) {
+    var pct2 = Math.round(data[i][1] / total * 100);
+    legend += '<div class="legend-row">' +
+      '<div class="legend-dot" style="background:' + PALETTE[i % PALETTE.length] + '"></div>' +
+      '<div class="legend-label">' + esc(data[i][0]) + '</div>' +
+      '<div class="legend-val">' + data[i][1] + ' (' + pct2 + '%)</div></div>';
+  }
+  return '<div class="donut-wrap">' +
+    '<svg class="donut-svg" width="170" height="170" viewBox="0 0 170 170">' +
+    '<circle cx="85" cy="85" r="70" fill="none" stroke="var(--paper2)" stroke-width="28"/>' +
+    segments +
+    '<text x="85" y="81" text-anchor="middle" font-family="Playfair Display,serif" font-size="22" font-weight="700" fill="var(--groove)">' + total + '</text>' +
+    '<text x="85" y="97" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="var(--ink3)">discos</text>' +
+    '</svg>' +
+    '<div class="donut-legend">' + legend + '</div></div>';
+}
+
+function buildBubbles(data) {
+  var max = data[0][1];
+  var bubbles = '';
+  for (var i = 0; i < data.length; i++) {
+    var n = data[i][1], decade = data[i][0];
+    var size = Math.round(40 + (n / max) * 70);
+    var color = PALETTE[i % PALETTE.length];
+    bubbles += '<div class="bubble" style="width:' + size + 'px;height:' + size + 'px;background:' + color + '">' +
+      '<div class="bubble-label">' + esc(decade) + 's: ' + n + ' discos</div>' +
+      '<div class="bubble-text">' + esc(decade) + 's<br>' + n + '</div></div>';
+  }
+  return '<div class="bubble-wrap">' + bubbles + '</div>';
 }
 
 /* ═══════════════ EXPORT / IMPORT ═══════════════ */
@@ -1085,8 +1462,7 @@ function doExport() {
 }
 
 function copyExport() {
-  var ta = document.getElementById('xta');
-  ta.select();
+  var ta = document.getElementById('xta'); ta.select();
   try { document.execCommand('copy'); alert('Copiado al portapapeles.'); } catch(e) {}
 }
 
